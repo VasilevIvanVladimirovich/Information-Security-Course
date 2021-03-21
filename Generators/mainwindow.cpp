@@ -214,11 +214,5 @@ void MainWindow::on_pushButton_clicked()
    bars2->setData(x2, y2,true);
    bars2->setWidth(h);
    ui->qt2->replot();
-
-
-
-
-
-
    delete [] arrayBBS;
 }
