@@ -28,8 +28,15 @@
        <layout class="QFormLayout" name="formLayout">
         <item row="0" column="0">
          <widget class="QLabel" name="label_3">
+          <property name="font">
+           <font>
+            <family>Aero Matics</family>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
           <property name="text">
-           <string>a</string>
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;a(5):&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
          </widget>
         </item>
@@ -41,12 +48,27 @@
             <height>16777215</height>
            </size>
           </property>
+          <property name="font">
+           <font>
+            <family>Aero Matics</family>
+            <pointsize>18</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
          </widget>
         </item>
         <item row="1" column="0">
          <widget class="QLabel" name="label_2">
+          <property name="font">
+           <font>
+            <family>Aero Matics</family>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
           <property name="text">
-           <string>c</string>
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;c(3):&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
          </widget>
         </item>
@@ -58,12 +80,27 @@
             <height>16777215</height>
            </size>
           </property>
+          <property name="font">
+           <font>
+            <family>Aero Matics</family>
+            <pointsize>18</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
          </widget>
         </item>
         <item row="2" column="0">
          <widget class="QLabel" name="label_4">
+          <property name="font">
+           <font>
+            <family>Aero Matics</family>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
           <property name="text">
-           <string>m</string>
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Интервал (m):&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
          </widget>
         </item>
@@ -75,12 +112,27 @@
             <height>16777215</height>
            </size>
           </property>
+          <property name="font">
+           <font>
+            <family>Aero Matics</family>
+            <pointsize>18</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
          </widget>
         </item>
         <item row="3" column="0">
          <widget class="QLabel" name="label_5">
+          <property name="font">
+           <font>
+            <family>Aero Matics</family>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
           <property name="text">
-           <string>N</string>
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Кол-во чисел(N):&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
          </widget>
         </item>
@@ -92,6 +144,14 @@
             <height>16777215</height>
            </size>
           </property>
+          <property name="font">
+           <font>
+            <family>Aero Matics</family>
+            <pointsize>18</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
          </widget>
         </item>
        </layout>
@@ -100,8 +160,15 @@
        <layout class="QFormLayout" name="formLayout_4">
         <item row="0" column="0">
          <widget class="QLabel" name="label_7">
+          <property name="font">
+           <font>
+            <family>Aero Matics</family>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
           <property name="text">
-           <string>p (131)</string>
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;p (131):&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
          </widget>
         </item>
@@ -113,12 +180,27 @@
             <height>16777215</height>
            </size>
           </property>
+          <property name="font">
+           <font>
+            <family>Aero Matics</family>
+            <pointsize>18</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
          </widget>
         </item>
         <item row="1" column="0">
          <widget class="QLabel" name="label_8">
+          <property name="font">
+           <font>
+            <family>Aero Matics</family>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
           <property name="text">
-           <string>q (47)</string>
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;q (47):&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
          </widget>
         </item>
@@ -130,6 +212,14 @@
             <height>16777215</height>
            </size>
           </property>
+          <property name="font">
+           <font>
+            <family>Aero Matics</family>
+            <pointsize>18</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
          </widget>
         </item>
        </layout>
@@ -138,8 +228,15 @@
     </item>
     <item>
      <widget class="QLabel" name="label_6">
+      <property name="font">
+       <font>
+        <family>Aero Matics</family>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
       <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Линейные конгруэнтный генератор &lt;span style=&quot; font-style:italic;&quot;&gt;X &lt;/span&gt;&lt;span style=&quot; font-style:italic; vertical-align:sub;&quot;&gt;n + 1 &lt;/span&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;= (a X &lt;/span&gt;&lt;span style=&quot; font-style:italic; vertical-align:sub;&quot;&gt;n&lt;/span&gt;&lt;span style=&quot; font-style:italic;&quot;&gt; + c) mod m&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Линейные конгруэнтный генератор &lt;/span&gt;&lt;span style=&quot; font-size:18pt; font-style:italic;&quot;&gt;X &lt;/span&gt;&lt;span style=&quot; font-size:18pt; font-style:italic; vertical-align:sub;&quot;&gt;n + 1 &lt;/span&gt;&lt;span style=&quot; font-size:18pt; font-style:italic;&quot;&gt;= (a X &lt;/span&gt;&lt;span style=&quot; font-size:18pt; font-style:italic; vertical-align:sub;&quot;&gt;n&lt;/span&gt;&lt;span style=&quot; font-size:18pt; font-style:italic;&quot;&gt; + c) mod m&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
      </widget>
     </item>
@@ -150,7 +247,7 @@
         <property name="minimumSize">
          <size>
           <width>200</width>
-          <height>243</height>
+          <height>200</height>
          </size>
         </property>
         <property name="maximumSize">
@@ -158,6 +255,14 @@
           <width>200</width>
           <height>1000</height>
          </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>Aero Matics</family>
+          <pointsize>16</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
         </property>
        </widget>
       </item>
@@ -175,14 +280,29 @@
           <height>500</height>
          </size>
         </property>
+        <property name="font">
+         <font>
+          <family>Aero Matics</family>
+          <pointsize>18</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
        </widget>
       </item>
      </layout>
     </item>
     <item>
      <widget class="QLabel" name="label_9">
+      <property name="font">
+       <font>
+        <family>Aero Matics</family>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
       <property name="text">
-       <string>Генератора псевдослучайных чисел BBS  </string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Генератора псевдослучайных чисел BBS  &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
      </widget>
     </item>
@@ -202,6 +322,14 @@
           <height>1000</height>
          </size>
         </property>
+        <property name="font">
+         <font>
+          <family>Aero Matics</family>
+          <pointsize>16</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
        </widget>
       </item>
       <item>
@@ -218,14 +346,29 @@
           <height>500</height>
          </size>
         </property>
+        <property name="font">
+         <font>
+          <family>Aero Matics</family>
+          <pointsize>18</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
        </widget>
       </item>
      </layout>
     </item>
     <item>
      <widget class="QLabel" name="label_10">
+      <property name="font">
+       <font>
+        <family>Aero Matics</family>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
       <property name="text">
-       <string>Линейным рекуррентным генератором (LFSR) </string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Линейным рекуррентным генератором (LFSR) &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
      </widget>
     </item>
@@ -245,6 +388,14 @@
           <height>1000</height>
          </size>
         </property>
+        <property name="font">
+         <font>
+          <family>Aero Matics</family>
+          <pointsize>16</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
        </widget>
       </item>
       <item>
@@ -261,12 +412,28 @@
           <height>16777215</height>
          </size>
         </property>
+        <property name="font">
+         <font>
+          <family>Aero Matics</family>
+          <pointsize>18</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
        </widget>
       </item>
      </layout>
     </item>
     <item>
      <widget class="QPushButton" name="pushButton">
+      <property name="font">
+       <font>
+        <family>Aero Matics</family>
+        <pointsize>18</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
       <property name="text">
        <string>Генерировать</string>
       </property>

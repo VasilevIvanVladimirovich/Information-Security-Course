@@ -18,7 +18,7 @@ public:
     void CheckLCP(int A,int B,int M,QString &str);
     bool CheckBBS(QString &str,int p,int q);
     QString GenerateLCP(int *arrayLCP,int A,int B,int M,int N,QString str);
-    QString GenerateBBS(int *arrayBBS,int p,int q,int N);
+    QString GenerateBBS(int *arrayBBS,int p,int q,int N,int M);
     double MaxValue(int * gen,int n);
     double MinValue(int * gen,int n);
     int gcd(int x, int y);

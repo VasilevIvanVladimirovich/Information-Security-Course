@@ -3,6 +3,7 @@
 #include "qcustomplot.h"
 #include <cmath>
 #include <ctime>
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -110,24 +111,35 @@ bool MainWindow::CheckBBS(QString &str,int p,int q)
 
 }
 
-QString MainWindow::GenerateBBS(int *arrayBBS,int p,int q,int N)
+QString MainWindow::GenerateBBS(int *arrayBBS,int p,int q,int N,int M)
 {
+    //должен преобразовывать в двоичный код, делиться на биты по кол-ву символов и преобразовавыться в число
     srand(time(NULL));
     QString str="";
+    int buf_counter;
+    int sum_binare;
     if(CheckBBS(str,p,q))
     {
-        int M = p * q;
+        int m = p * q;
         int x;
         do
         {
-            x =rand() % M;
-            str=str+QString::number(x)+"\n";
-        }while(gcd(x,M)!=1);
-        for(int i = 0;i<N;i++)
+            x =rand() % m;
+
+        }while(gcd(x,m)!=1);
+        for(int j = 0;j<N;j++)
         {
-            arrayBBS[i]=(x*x) % M;
-            x=arrayBBS[i];
-            str=str+"X"+QString::number(i)+"= "+QString::number(arrayBBS[i])+"\n";
+            sum_binare=0;
+        for(int i = 0;i <= ceil(log(M));i++)
+        {
+            buf_counter=(x*x) % m;
+            x=buf_counter;
+            buf_counter%=2;
+            sum_binare+=buf_counter * pow(2,i);
+            //str=str+"X"+QString::number(i)+"= "+QString::number(sum_binare)+"\n";
+        }
+        arrayBBS[j]=sum_binare;
+        str=str+"X"+QString::number(j)+"= "+QString::number(arrayBBS[j])+"\n";
         }
        return str;
     }else return str=str+"Выбраные значени p и q не подходят!";
@@ -165,14 +177,14 @@ void MainWindow::on_pushButton_clicked()
           y1[i] = ni/(N*h);
           hh+=h;
          }
-   double maxY=a,minY=b;
+   double first_maxY=a,first_minY=b;
    for(int i=0; i<m; i++)
            {
-               if(y1[i]>maxY) maxY = y1[i];
-               if(y1[i]<minY) minY = y1[i];
+               if(y1[i]>first_maxY) first_maxY = y1[i];
+               if(y1[i]<first_minY) first_minY = y1[i];
            }
        ui->qt1->xAxis->setRange(0,b+0.5);
-       ui->qt1->yAxis->setRange(0,maxY+minY); //сюда надо вставить максимальное h
+       ui->qt1->yAxis->setRange(0,first_maxY+first_minY); //сюда надо вставить максимальное h
    QCPBars *bars1 = new QCPBars(ui->qt1->xAxis, ui->qt1->yAxis);
    bars1->setData(x1, y1,true);
    bars1->setWidth(h);
@@ -182,7 +194,7 @@ void MainWindow::on_pushButton_clicked()
    int p = ui->lineEdit_5->text().toInt();
    int q = ui->lineEdit_6->text().toInt();
    int *arrayBBS = new int[N];
-   ui->textBrowser_2->setText(GenerateBBS(arrayBBS,p,q,N));
+   ui->textBrowser_2->setText(GenerateBBS(arrayBBS,p,q,N,M));
    hh=0;
    m = 1+3.22*log(N);
    a=MinValue(arrayBBS,N);
@@ -202,14 +214,15 @@ void MainWindow::on_pushButton_clicked()
           y2[i] = ni/(N*h);
           hh+=h;
          }
-   maxY=0,minY=0;
+   double tw_maxY=a,tw_minY=b;
    for(int i=0; i<m; i++)
            {
-               if(y2[i]>maxY) maxY = y2[i];
-               if(y2[i]<minY) minY = y2[i];
+               if(y2[i]>tw_maxY) tw_maxY = y2[i];
+               if(y2[i]<tw_minY) tw_minY = y2[i];
            }
-       ui->qt2->xAxis->setRange(0,b+0.5);
-       ui->qt2->yAxis->setRange(0,maxY); //сюда надо вставить максимальное h
+   ui->qt2->xAxis->setRange(0,b+0.5);
+   ui->qt2->yAxis->setRange(0,first_maxY+first_minY);
+
    QCPBars *bars2 = new QCPBars(ui->qt2->xAxis, ui->qt2->yAxis);
    bars2->setData(x2, y2,true);
    bars2->setWidth(h);
