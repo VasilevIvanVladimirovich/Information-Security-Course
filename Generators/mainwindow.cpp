@@ -144,11 +144,51 @@ QString MainWindow::GenerateBBS(int *arrayBBS,int p,int q,int N,int M)
        return str;
     }else return str=str+"Выбраные значени p и q не подходят!";
 }
+
+void MainWindow::MatrixMultiplication(int (&A_matr)[5][5],int *x0,int *x_func)
+{
+    int sum;
+    for(int i = 0;i<5;i++)
+    {
+        sum=0;
+        for(int j=0;j<5;j++)
+        {
+            sum+=A_matr[i][j] * x0[j];
+        }
+        x_func[i]=sum;
+    }
+}
+
+QString MainWindow::GenerateLFSR(int *arrayLFSR,int (&A_matr)[5][5],int N,QString str)
+{
+    int x0[5]={1,0,0,0,0};
+    int x_func[5];
+    int sum_binare;
+    for(int i=0;i<N;i++)
+    {
+        MatrixMultiplication(A_matr,x0,x_func);
+        for(int count=0;count<5;count++)
+        {
+            x0[count]=x_func[count];
+            x0[count]%=2;
+        }
+        sum_binare=0;
+        for(int j=4,k=0;k<5;j--,k++)
+        {
+            sum_binare+=x0[j] * pow(2,k);
+        }
+        arrayLFSR[i]=sum_binare;
+        str=str+"X"+QString::number(i)+"= "+QString::number(arrayLFSR[i])+"\n";
+    }
+    return str;
+}
+
 void MainWindow::on_pushButton_clicked()
 {
-//////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////
    ui->qt1->clearPlottables();
    ui->qt2->clearPlottables();
+   ui->qt3->clearPlottables();
    int A = ui->lineEdit->text().toInt();
    int B = ui->lineEdit_2->text().toInt();
    int M = ui->lineEdit_3->text().toInt();
@@ -183,14 +223,14 @@ void MainWindow::on_pushButton_clicked()
                if(y1[i]>first_maxY) first_maxY = y1[i];
                if(y1[i]<first_minY) first_minY = y1[i];
            }
-       ui->qt1->xAxis->setRange(0,b+0.5);
-       ui->qt1->yAxis->setRange(0,first_maxY+first_minY); //сюда надо вставить максимальное h
+       ui->qt1->xAxis->setRange(0,M+1);
+       ui->qt1->yAxis->setRange(0,first_maxY+first_minY+0.01); //сюда надо вставить максимальное h
    QCPBars *bars1 = new QCPBars(ui->qt1->xAxis, ui->qt1->yAxis);
    bars1->setData(x1, y1,true);
    bars1->setWidth(h);
    ui->qt1->replot();
    delete [] arrayLCP;
-//////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////
    int p = ui->lineEdit_5->text().toInt();
    int q = ui->lineEdit_6->text().toInt();
    int *arrayBBS = new int[N];
@@ -214,18 +254,56 @@ void MainWindow::on_pushButton_clicked()
           y2[i] = ni/(N*h);
           hh+=h;
          }
-   double tw_maxY=a,tw_minY=b;
-   for(int i=0; i<m; i++)
-           {
-               if(y2[i]>tw_maxY) tw_maxY = y2[i];
-               if(y2[i]<tw_minY) tw_minY = y2[i];
-           }
-   ui->qt2->xAxis->setRange(0,b+0.5);
-   ui->qt2->yAxis->setRange(0,first_maxY+first_minY);
+   ui->qt2->xAxis->setRange(0,M+1);
+   ui->qt2->yAxis->setRange(0,first_maxY+first_minY+0.01);
 
    QCPBars *bars2 = new QCPBars(ui->qt2->xAxis, ui->qt2->yAxis);
    bars2->setData(x2, y2,true);
    bars2->setWidth(h);
    ui->qt2->replot();
    delete [] arrayBBS;
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+   int X4 = ui->lineEdit_8->text().toInt();
+   int X3 = ui->lineEdit_9->text().toInt();
+   int X2 = ui->lineEdit_10->text().toInt();
+   int X1 = ui->lineEdit_11->text().toInt();
+   int X0 = ui->lineEdit_12->text().toInt();
+
+   int A_matr[5][5]={
+       {X4,X3,X2,X1,X0},
+       {1,0,0,0,0},
+       {0,1,0,0,0},
+       {0,0,1,0,0},
+       {0,0,0,1,0},
+   };
+   int *arrayLFSR=new int [N];
+   QString strLFSR;
+   ui->textBrowser_3->setText(GenerateLFSR(arrayLFSR,A_matr,N,strLFSR));
+   hh=0;
+   m = 1+3.22*log(N);
+   a=MinValue(arrayLFSR,N);
+   b=MaxValue(arrayLFSR,N);
+   h = double(b-a)/m;
+
+   QVector<double> x3(m), y3(m);
+   for (int i=0; i<m; i++)
+       {
+         ni=0;
+         for(int j = 0; j<N;j++)
+         {
+       if(arrayLFSR[j] >= double(a)+hh and arrayLFSR[j] < double(a)+hh+h) ni++;
+            else continue;
+         }
+          x3[i] = double(a)+hh+(h/2);
+          y3[i] = ni/(N*h);
+          hh+=h;
+         }
+   ui->qt3->xAxis->setRange(0,M+1);
+   ui->qt3->yAxis->setRange(0,first_maxY+first_minY+0.01);
+   QCPBars *bars3 = new QCPBars(ui->qt3->xAxis, ui->qt3->yAxis);
+   bars3->setData(x3, y3,true);
+   bars3->setWidth(h);
+   ui->qt3->replot();
+   delete [] arrayLFSR;
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 }

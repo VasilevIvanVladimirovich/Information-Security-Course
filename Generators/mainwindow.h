@@ -19,8 +19,10 @@ public:
     bool CheckBBS(QString &str,int p,int q);
     QString GenerateLCP(int *arrayLCP,int A,int B,int M,int N,QString str);
     QString GenerateBBS(int *arrayBBS,int p,int q,int N,int M);
+    QString GenerateLFSR(int *arrayLFSR,int (&A_matr)[5][5],int N,QString str);
     double MaxValue(int * gen,int n);
     double MinValue(int * gen,int n);
+    void MatrixMultiplication(int (&A_matr)[5][5],int *x0,int *x_func);
     int gcd(int x, int y);
     bool isPrime(int n);
 private slots:
