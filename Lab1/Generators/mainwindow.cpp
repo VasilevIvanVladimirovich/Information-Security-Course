@@ -214,7 +214,7 @@ void MainWindow::on_pushButton_clicked()
             else continue;
          }
           x1[i] = double(a)+hh+(h/2);
-          y1[i] = ni/(N*h);
+          y1[i] = ni;
           hh+=h;
          }
    double first_maxY=a,first_minY=b;
@@ -224,7 +224,7 @@ void MainWindow::on_pushButton_clicked()
                if(y1[i]<first_minY) first_minY = y1[i];
            }
        ui->qt1->xAxis->setRange(0,M+1);
-       ui->qt1->yAxis->setRange(0,first_maxY+first_minY+0.01); //сюда надо вставить максимальное h
+       ui->qt1->yAxis->setRange(0,first_maxY+first_minY); //сюда надо вставить максимальное h
    QCPBars *bars1 = new QCPBars(ui->qt1->xAxis, ui->qt1->yAxis);
    bars1->setData(x1, y1,true);
    bars1->setWidth(h);
@@ -251,11 +251,11 @@ void MainWindow::on_pushButton_clicked()
             else continue;
          }
           x2[i] = double(a)+hh+(h/2);
-          y2[i] = ni/(N*h);
+          y2[i] = ni;
           hh+=h;
          }
    ui->qt2->xAxis->setRange(0,M+1);
-   ui->qt2->yAxis->setRange(0,first_maxY+first_minY+0.01);
+   ui->qt2->yAxis->setRange(0,first_maxY+first_minY);
 
    QCPBars *bars2 = new QCPBars(ui->qt2->xAxis, ui->qt2->yAxis);
    bars2->setData(x2, y2,true);
@@ -295,11 +295,11 @@ void MainWindow::on_pushButton_clicked()
             else continue;
          }
           x3[i] = double(a)+hh+(h/2);
-          y3[i] = ni/(N*h);
+          y3[i] = ni;
           hh+=h;
          }
    ui->qt3->xAxis->setRange(0,M+1);
-   ui->qt3->yAxis->setRange(0,first_maxY+first_minY+0.01);
+   ui->qt3->yAxis->setRange(0,first_maxY+first_minY);
    QCPBars *bars3 = new QCPBars(ui->qt3->xAxis, ui->qt3->yAxis);
    bars3->setData(x3, y3,true);
    bars3->setWidth(h);
