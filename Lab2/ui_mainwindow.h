@@ -48,14 +48,15 @@ public:
     QLineEdit *lineEdit;
     QLabel *label_7;
     QLineEdit *lineEdit_2;
-    QTextEdit *debug;
+    QLabel *label_10;
+    QCustomPlot *textPlot;
     QPushButton *pushButton;
     QWidget *tab_4;
     QVBoxLayout *verticalLayout_8;
     QHBoxLayout *horizontalLayout_5;
     QVBoxLayout *verticalLayout_10;
     QLabel *label_5;
-    QCustomPlot *CBC;
+    QCustomPlot *OFB;
     QLabel *label_3;
     QCustomPlot *CPC;
     QVBoxLayout *verticalLayout_9;
@@ -154,10 +155,16 @@ public:
 
         verticalLayout_7->addLayout(horizontalLayout);
 
-        debug = new QTextEdit(Text);
-        debug->setObjectName(QString::fromUtf8("debug"));
+        label_10 = new QLabel(Text);
+        label_10->setObjectName(QString::fromUtf8("label_10"));
 
-        verticalLayout_7->addWidget(debug);
+        verticalLayout_7->addWidget(label_10);
+
+        textPlot = new QCustomPlot(Text);
+        textPlot->setObjectName(QString::fromUtf8("textPlot"));
+        textPlot->setMinimumSize(QSize(0, 250));
+
+        verticalLayout_7->addWidget(textPlot);
 
         pushButton = new QPushButton(Text);
         pushButton->setObjectName(QString::fromUtf8("pushButton"));
@@ -178,11 +185,11 @@ public:
 
         verticalLayout_10->addWidget(label_5);
 
-        CBC = new QCustomPlot(tab_4);
-        CBC->setObjectName(QString::fromUtf8("CBC"));
-        CBC->setMinimumSize(QSize(600, 300));
+        OFB = new QCustomPlot(tab_4);
+        OFB->setObjectName(QString::fromUtf8("OFB"));
+        OFB->setMinimumSize(QSize(600, 300));
 
-        verticalLayout_10->addWidget(CBC);
+        verticalLayout_10->addWidget(OFB);
 
         label_3 = new QLabel(tab_4);
         label_3->setObjectName(QString::fromUtf8("label_3"));
@@ -235,7 +242,7 @@ public:
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 1263, 41));
+        menubar->setGeometry(QRect(0, 0, 1263, 34));
         MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));
@@ -257,9 +264,10 @@ public:
         label_9->setText(QCoreApplication::translate("MainWindow", "K0:", nullptr));
         label_6->setText(QCoreApplication::translate("MainWindow", "P0:", nullptr));
         label_7->setText(QCoreApplication::translate("MainWindow", "C0:", nullptr));
+        label_10->setText(QCoreApplication::translate("MainWindow", "Histogram text", nullptr));
         pushButton->setText(QCoreApplication::translate("MainWindow", "\320\240\320\260\321\201\321\207\321\221\321\202", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(Text), QCoreApplication::translate("MainWindow", "Text", nullptr));
-        label_5->setText(QCoreApplication::translate("MainWindow", "CBC", nullptr));
+        label_5->setText(QCoreApplication::translate("MainWindow", "OFB", nullptr));
         label_3->setText(QCoreApplication::translate("MainWindow", "CPC", nullptr));
         label_2->setText(QCoreApplication::translate("MainWindow", "ECB", nullptr));
         label_4->setText(QCoreApplication::translate("MainWindow", "CFB", nullptr));

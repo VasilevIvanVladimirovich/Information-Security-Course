@@ -13,8 +13,33 @@ class MainWindow : public QMainWindow
 
 public:
     MainWindow(QWidget *parent = nullptr);
+
     void Word(QString str, QVector<int> &bit_arr);
+
     void bin(int n,QVector<int> &bit_arr);
+
+    void invertLastBit(QVector<int> &out_bit);
+
+    void invertBit(QVector<int> &out_bit,int i);
+
+    double MinValue(QVector<int> &gen,int n);
+
+    double MaxValue(QVector<int> &gen,int n);
+
+    void sumArray(int* arr1,int *arr2,int *result);
+
+    void sum(QVector<int> &out_bit,int *buf_array,int *K);
+
+    void ECB(QVector<int> &bit_array,QVector<int> &ECB_out_bit,int *K0,int *K1);
+
+    void CPC(QVector<int> &bit_array,QVector<int> &CPC_out_bit,int *C0);
+
+    void OFB(QVector<int> &bit_array,QVector<int> &OFB_out_bit,int *C0,int *P0);
+
+    void CFB(QVector<int> &bit_array,QVector<int> &OFB_out_bit,int *C0);
+
+
+
     ~MainWindow();
 
 private slots:
