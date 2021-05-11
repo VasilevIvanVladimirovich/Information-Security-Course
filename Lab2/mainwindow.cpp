@@ -2,6 +2,8 @@
 #include "ui_mainwindow.h"
 #include "qcustomplot.h"
 
+QString debug="";
+
 MainWindow::MainWindow(QWidget *parent)
         : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
@@ -159,17 +161,103 @@ void MainWindow::CFB(QVector<int> &bit_array, QVector<int> &OFB_out_bit, int *C0
     }
 }
 
+bool MainWindow::checkWordInArray(int idexText,  QString text, QString *arrayText)
+{
+    for(int i=0;i<16;i++)
+    {
+        if(text[idexText]==arrayText[i] || text[idexText]==" ") return false;
+    }
+    return true;
+}
+
+bool MainWindow::checkWordInAlph(int indexAlph,QString *alph, QString *arrayText)
+{
+    for(int i = 0; i<16;i++)
+    {
+        if(alph[indexAlph]==arrayText[i]) return false;
+    }
+    return true;
+}
+
+void MainWindow::createNewAlph(QString text,QString *alph)
+{
+    QString arrayText[16]={0};
+    QString arrayLast[16]={0};
+    QString lastWord;
+    for(int idexText=0, indexArrey=0; indexArrey<16; idexText++) // алгоритм заполнения верхнего массива (текстового по ключу)
+    {
+            if(checkWordInArray(idexText,text,arrayText))
+            {
+                arrayText[indexArrey] = text[idexText];
+                indexArrey++;
+
+        }
+    }
+    for(int indexAlph=0,ind=0;indexAlph<32 && ind<17;indexAlph++)  // алгоритм заполнения нижнего массива (оставшиеся пары)
+    {
+       if(checkWordInAlph(indexAlph,alph,arrayText))
+       {
+           arrayLast[ind] = alph[indexAlph];
+           ind++;
+       }else continue;
+    }
+bool exit=false;
+  for(int indexAlph=0;indexAlph<32;indexAlph++)
+    {
+      exit=false;
+      for(int i = 0;i<16;i++)
+      {
+          if(alph[indexAlph]==arrayText[i])
+          {
+              alph[indexAlph] = arrayLast[i];
+              exit=true;
+              break;
+          }
+      }
+      if(exit) continue;
+        for(int i = 0;i<16;i++)
+        {
+            if(alph[indexAlph]==arrayLast[i])
+            {
+                alph[indexAlph] = arrayText[i];
+                break;
+            }
+        }
+
+    }
+
+}
+
+void MainWindow::lab2(QString text)
+{
+    QString alph[32] = {"а", "б", "в", "г", "д", "е", "ж", "з", "и","й","к", "л", "м", "н", "о", "п", "р", "с", "т",
+                        "у", "ф", "х", "ц", "ч", "ш", "щ", "ъ", "ы", "ь", "э", "ю", "я"};
+    text.toLower();
+    createNewAlph(text,alph);
+
+    ui->debugedit->setText(debug);
+}
+
 void MainWindow::on_pushButton_clicked() {
     ui->OFB->clearPlottables(); //очистка гистограмм
     ui->CPC->clearPlottables();
     ui->CFB->clearPlottables();
     ui->ECB->clearPlottables();
+
+    ui->plot1->clearPlottables();
+    ui->plot2->clearPlottables();
+    ui->plot3->clearPlottables();
+    ui->plot4->clearPlottables();
+
     ui->textPlot->clearPlottables();
+    ui->textEdit->setText("железный шпиц дома лежит");
     QString text = ui->textEdit->toPlainText(); //ввод с окна
     QString k0 = ui->lineEdit_4->text();
     QString k1 = ui->lineEdit_3->text();
     QString p0 = ui->lineEdit->text();
     QString c0 = ui->lineEdit_2->text();
+
+    lab2(text);
 
     int K0[5];
     int K1[5];

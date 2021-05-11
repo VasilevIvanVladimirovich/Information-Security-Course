@@ -108,6 +108,9 @@
          </layout>
         </item>
         <item>
+         <widget class="QTextEdit" name="debugedit"/>
+        </item>
+        <item>
          <widget class="QLabel" name="label_10">
           <property name="text">
            <string>Histogram text</string>
@@ -133,9 +136,96 @@
         </item>
        </layout>
       </widget>
+      <widget class="QWidget" name="lab2">
+       <attribute name="title">
+        <string>Histogram lab2</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout_3">
+            <item>
+             <widget class="QLabel" name="label_11">
+              <property name="text">
+               <string>Традиционное шифрование парного шифра</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCustomPlot" name="plot1" native="true">
+              <property name="minimumSize">
+               <size>
+                <width>600</width>
+                <height>300</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_13">
+              <property name="text">
+               <string>С помощью ключа поговорки</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCustomPlot" name="plot3" native="true">
+              <property name="minimumSize">
+               <size>
+                <width>600</width>
+                <height>300</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout_4">
+            <item>
+             <widget class="QLabel" name="label_12">
+              <property name="text">
+               <string>С помощью ключа по номеру студента</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCustomPlot" name="plot2" native="true">
+              <property name="minimumSize">
+               <size>
+                <width>600</width>
+                <height>300</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_14">
+              <property name="text">
+               <string>С помощью LFSR</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCustomPlot" name="plot4" native="true">
+              <property name="minimumSize">
+               <size>
+                <width>600</width>
+                <height>300</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
       <widget class="QWidget" name="tab_4">
        <attribute name="title">
-        <string>Histogram</string>
+        <string>Histogram DES</string>
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_8">
         <item>

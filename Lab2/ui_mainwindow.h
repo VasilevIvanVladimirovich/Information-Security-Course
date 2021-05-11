@@ -48,9 +48,23 @@ public:
     QLineEdit *lineEdit;
     QLabel *label_7;
     QLineEdit *lineEdit_2;
+    QTextEdit *debugedit;
     QLabel *label_10;
     QCustomPlot *textPlot;
     QPushButton *pushButton;
+    QWidget *lab2;
+    QVBoxLayout *verticalLayout_2;
+    QHBoxLayout *horizontalLayout_2;
+    QVBoxLayout *verticalLayout_3;
+    QLabel *label_11;
+    QCustomPlot *plot1;
+    QLabel *label_13;
+    QCustomPlot *plot3;
+    QVBoxLayout *verticalLayout_4;
+    QLabel *label_12;
+    QCustomPlot *plot2;
+    QLabel *label_14;
+    QCustomPlot *plot4;
     QWidget *tab_4;
     QVBoxLayout *verticalLayout_8;
     QHBoxLayout *horizontalLayout_5;
@@ -155,6 +169,11 @@ public:
 
         verticalLayout_7->addLayout(horizontalLayout);
 
+        debugedit = new QTextEdit(Text);
+        debugedit->setObjectName(QString::fromUtf8("debugedit"));
+
+        verticalLayout_7->addWidget(debugedit);
+
         label_10 = new QLabel(Text);
         label_10->setObjectName(QString::fromUtf8("label_10"));
 
@@ -172,6 +191,70 @@ public:
         verticalLayout_7->addWidget(pushButton);
 
         tabWidget->addTab(Text, QString());
+        lab2 = new QWidget();
+        lab2->setObjectName(QString::fromUtf8("lab2"));
+        verticalLayout_2 = new QVBoxLayout(lab2);
+        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
+        horizontalLayout_2 = new QHBoxLayout();
+        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+        verticalLayout_3 = new QVBoxLayout();
+        verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
+        label_11 = new QLabel(lab2);
+        label_11->setObjectName(QString::fromUtf8("label_11"));
+
+        verticalLayout_3->addWidget(label_11);
+
+        plot1 = new QCustomPlot(lab2);
+        plot1->setObjectName(QString::fromUtf8("plot1"));
+        plot1->setMinimumSize(QSize(600, 300));
+
+        verticalLayout_3->addWidget(plot1);
+
+        label_13 = new QLabel(lab2);
+        label_13->setObjectName(QString::fromUtf8("label_13"));
+
+        verticalLayout_3->addWidget(label_13);
+
+        plot3 = new QCustomPlot(lab2);
+        plot3->setObjectName(QString::fromUtf8("plot3"));
+        plot3->setMinimumSize(QSize(600, 300));
+
+        verticalLayout_3->addWidget(plot3);
+
+
+        horizontalLayout_2->addLayout(verticalLayout_3);
+
+        verticalLayout_4 = new QVBoxLayout();
+        verticalLayout_4->setObjectName(QString::fromUtf8("verticalLayout_4"));
+        label_12 = new QLabel(lab2);
+        label_12->setObjectName(QString::fromUtf8("label_12"));
+
+        verticalLayout_4->addWidget(label_12);
+
+        plot2 = new QCustomPlot(lab2);
+        plot2->setObjectName(QString::fromUtf8("plot2"));
+        plot2->setMinimumSize(QSize(600, 300));
+
+        verticalLayout_4->addWidget(plot2);
+
+        label_14 = new QLabel(lab2);
+        label_14->setObjectName(QString::fromUtf8("label_14"));
+
+        verticalLayout_4->addWidget(label_14);
+
+        plot4 = new QCustomPlot(lab2);
+        plot4->setObjectName(QString::fromUtf8("plot4"));
+        plot4->setMinimumSize(QSize(600, 300));
+
+        verticalLayout_4->addWidget(plot4);
+
+
+        horizontalLayout_2->addLayout(verticalLayout_4);
+
+
+        verticalLayout_2->addLayout(horizontalLayout_2);
+
+        tabWidget->addTab(lab2, QString());
         tab_4 = new QWidget();
         tab_4->setObjectName(QString::fromUtf8("tab_4"));
         verticalLayout_8 = new QVBoxLayout(tab_4);
@@ -267,11 +350,16 @@ public:
         label_10->setText(QCoreApplication::translate("MainWindow", "Histogram text", nullptr));
         pushButton->setText(QCoreApplication::translate("MainWindow", "\320\240\320\260\321\201\321\207\321\221\321\202", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(Text), QCoreApplication::translate("MainWindow", "Text", nullptr));
+        label_11->setText(QCoreApplication::translate("MainWindow", "\320\242\321\200\320\260\320\264\320\270\321\206\320\270\320\276\320\275\320\275\320\276\320\265 \321\210\320\270\321\204\321\200\320\276\320\262\320\260\320\275\320\270\320\265 \320\277\320\260\321\200\320\275\320\276\320\263\320\276 \321\210\320\270\321\204\321\200\320\260", nullptr));
+        label_13->setText(QCoreApplication::translate("MainWindow", "\320\241 \320\277\320\276\320\274\320\276\321\211\321\214\321\216 \320\272\320\273\321\216\321\207\320\260 \320\277\320\276\320\263\320\276\320\262\320\276\321\200\320\272\320\270", nullptr));
+        label_12->setText(QCoreApplication::translate("MainWindow", "\320\241 \320\277\320\276\320\274\320\276\321\211\321\214\321\216 \320\272\320\273\321\216\321\207\320\260 \320\277\320\276 \320\275\320\276\320\274\320\265\321\200\321\203 \321\201\321\202\321\203\320\264\320\265\320\275\321\202\320\260", nullptr));
+        label_14->setText(QCoreApplication::translate("MainWindow", "\320\241 \320\277\320\276\320\274\320\276\321\211\321\214\321\216 LFSR", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(lab2), QCoreApplication::translate("MainWindow", "Histogram lab2", nullptr));
         label_5->setText(QCoreApplication::translate("MainWindow", "OFB", nullptr));
         label_3->setText(QCoreApplication::translate("MainWindow", "CPC", nullptr));
         label_2->setText(QCoreApplication::translate("MainWindow", "ECB", nullptr));
         label_4->setText(QCoreApplication::translate("MainWindow", "CFB", nullptr));
-        tabWidget->setTabText(tabWidget->indexOf(tab_4), QCoreApplication::translate("MainWindow", "Histogram", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(tab_4), QCoreApplication::translate("MainWindow", "Histogram DES", nullptr));
     } // retranslateUi
 
 };

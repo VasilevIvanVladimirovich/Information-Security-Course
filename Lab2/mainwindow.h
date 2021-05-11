@@ -38,7 +38,13 @@ public:
 
     void CFB(QVector<int> &bit_array,QVector<int> &OFB_out_bit,int *C0);
 
+    void createNewAlph(QString text,QString *alph);
 
+    bool checkWordInArray(int idexText,  QString text, QString *arrayText);
+
+    bool checkWordInAlph(int indexAlph, QString *alph, QString *arrayText);
+
+    void lab2(QString text);
 
     ~MainWindow();
 
