@@ -48,6 +48,10 @@ public:
 
     void createNewAlphConstant(QString *alph);
 
+    void GenerateLFSR(QVector<int> &arrayLFSR,int (&A_matr)[5][5],int N);
+
+    void MatrixMultiplication(int (&A_matr)[5][5],int *x0,int *x_func);
+
     void lab2(QString key,QString text);
 
     ~MainWindow();

@@ -262,15 +262,45 @@ void MainWindow::createNewAlphConstant(QString *alph)
             costil2++;
             continue;
         }
-        if(i>31-const_num)
-        {
-            alph[i]=alphDefault[costil];
-            costil++;
-            continue;
-        }
         alph[i]=alphDefault[i-const_num];
     }
 
+}
+
+void MainWindow::MatrixMultiplication(int (&A_matr)[5][5],int *x0,int *x_func)
+{
+    int sum;
+    for(int i = 0;i<5;i++)
+    {
+        sum=0;
+        for(int j=0;j<5;j++)
+        {
+            sum+=A_matr[i][j] * x0[j];
+        }
+        x_func[i]=sum;
+    }
+}
+
+void MainWindow::GenerateLFSR(QVector<int> &arrayLFSR,int (&A_matr)[5][5],int N)
+{
+    int x0[5]={1,0,0,0,0};
+    int x_func[5];
+    int sum_binare;
+    for(int i=0;i<N;i++)
+    {
+        MatrixMultiplication(A_matr,x0,x_func);
+        for(int count=0;count<5;count++)
+        {
+            x0[count]=x_func[count];
+            x0[count]%=2;
+        }
+        sum_binare=0;
+        for(int j=4,k=0;k<5;j--,k++)
+        {
+            sum_binare+=x0[j] * pow(2,k);
+        }
+        arrayLFSR.push_back(sum_binare);
+    }
 }
 
 void MainWindow::lab2(QString key, QString text)
@@ -280,7 +310,7 @@ void MainWindow::lab2(QString key, QString text)
 
     key = key.toLower();
     text = text.toLower();
-    int N;
+    int N=text.length();
     double h, hh = 0;
     double ni;
     int m = 32;
@@ -294,7 +324,6 @@ void MainWindow::lab2(QString key, QString text)
     Word(newText1, bit_array_one);
     convertBinareDecimal(bit_array_one, decimal_array_one);
 
-    N = decimal_array_one.length();
     hh = 0;
     a = MinValue(decimal_array_one, N);
     b = MaxValue(decimal_array_one, N);
@@ -329,7 +358,6 @@ void MainWindow::lab2(QString key, QString text)
     Word(newText2, bit_array_two);
     convertBinareDecimal(bit_array_two, decimal_array_two);
 
-    N = decimal_array_two.length();
     hh = 0;
     a = MinValue(decimal_array_two, N);
     b = MaxValue(decimal_array_two, N);
@@ -357,7 +385,7 @@ void MainWindow::lab2(QString key, QString text)
     ui->plot2->replot();
 
 
-    //ui->debugedit->setText(debug);
+    ui->debugedit->setText(debug);
 
 ///////////////////////////////////////////// 3
 
@@ -369,7 +397,6 @@ void MainWindow::lab2(QString key, QString text)
     Word(newText3, bit_array_tree);
     convertBinareDecimal(bit_array_tree, decimal_array_tree);
 
-    N = decimal_array_tree.length();
     hh = 0;
     a = MinValue(decimal_array_tree, N);
     b = MaxValue(decimal_array_tree, N);
@@ -397,6 +424,51 @@ void MainWindow::lab2(QString key, QString text)
     ui->plot3->replot();
  ///////////////////////////////////////////// 4
 
+
+      int X4 = 1;
+      int X3 = 1;
+      int X2 = 0;
+      int X1 = 1;
+      int X0 = 1;
+
+      int A_matr[5][5]={
+          {X4,X3,X2,X1,X0},
+          {1,0,0,0,0},
+          {0,1,0,0,0},
+          {0,0,1,0,0},
+          {0,0,0,1,0},
+      };
+      QVector<int> arrayLFSR;
+      GenerateLFSR(arrayLFSR,A_matr,N);
+
+      hh=0;
+      a=MinValue(arrayLFSR,N);
+      b=MaxValue(arrayLFSR,N);
+      h = 1;
+
+      QVector<double> x4(m), y4(m);
+      for (int i=0; i<m; i++)
+          {
+            ni=0;
+            for(int j = 0; j<N;j++)
+            {
+          if(arrayLFSR[j] >= double(a)+hh and arrayLFSR[j] < double(a)+hh+h) ni++;
+               else continue;
+            }
+             x4[i] = double(a)+hh+(h/2);
+             y4[i] = ni;
+             hh+=h;
+            }
+      first_maxY = 1;
+            for (int i = 0; i < m; i++) {
+                if (y4[i] > first_maxY) first_maxY = y4[i];
+            }
+      ui->plot4->xAxis->setRange(0,32);
+      ui->plot4->yAxis->setRange(0,first_maxY);
+      QCPBars *bars4 = new QCPBars(ui->plot4->xAxis, ui->plot4->yAxis);
+      bars4->setData(x4, y4,true);
+      bars4->setWidth(h);
+      ui->plot4->replot();
 }
 
 void MainWindow::on_pushButton_clicked() {
