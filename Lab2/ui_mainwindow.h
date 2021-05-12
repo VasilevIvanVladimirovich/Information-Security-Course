@@ -48,6 +48,10 @@ public:
     QLineEdit *lineEdit;
     QLabel *label_7;
     QLineEdit *lineEdit_2;
+    QHBoxLayout *horizontalLayout_4;
+    QFormLayout *formLayout_4;
+    QLabel *label_15;
+    QLineEdit *key;
     QTextEdit *debugedit;
     QLabel *label_10;
     QCustomPlot *textPlot;
@@ -168,6 +172,26 @@ public:
 
 
         verticalLayout_7->addLayout(horizontalLayout);
+
+        horizontalLayout_4 = new QHBoxLayout();
+        horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
+        formLayout_4 = new QFormLayout();
+        formLayout_4->setObjectName(QString::fromUtf8("formLayout_4"));
+        label_15 = new QLabel(Text);
+        label_15->setObjectName(QString::fromUtf8("label_15"));
+
+        formLayout_4->setWidget(0, QFormLayout::LabelRole, label_15);
+
+        key = new QLineEdit(Text);
+        key->setObjectName(QString::fromUtf8("key"));
+
+        formLayout_4->setWidget(0, QFormLayout::FieldRole, key);
+
+
+        horizontalLayout_4->addLayout(formLayout_4);
+
+
+        verticalLayout_7->addLayout(horizontalLayout_4);
 
         debugedit = new QTextEdit(Text);
         debugedit->setObjectName(QString::fromUtf8("debugedit"));
@@ -347,6 +371,7 @@ public:
         label_9->setText(QCoreApplication::translate("MainWindow", "K0:", nullptr));
         label_6->setText(QCoreApplication::translate("MainWindow", "P0:", nullptr));
         label_7->setText(QCoreApplication::translate("MainWindow", "C0:", nullptr));
+        label_15->setText(QCoreApplication::translate("MainWindow", "\320\237\320\276\320\263\320\276\320\262\320\276\321\200\320\272\320\260", nullptr));
         label_10->setText(QCoreApplication::translate("MainWindow", "Histogram text", nullptr));
         pushButton->setText(QCoreApplication::translate("MainWindow", "\320\240\320\260\321\201\321\207\321\221\321\202", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(Text), QCoreApplication::translate("MainWindow", "Text", nullptr));

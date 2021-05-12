@@ -2,6 +2,8 @@
 #include "ui_mainwindow.h"
 #include "qcustomplot.h"
 
+
+const int const_num=4;
 QString debug="";
 
 MainWindow::MainWindow(QWidget *parent)
@@ -161,11 +163,11 @@ void MainWindow::CFB(QVector<int> &bit_array, QVector<int> &OFB_out_bit, int *C0
     }
 }
 
-bool MainWindow::checkWordInArray(int idexText,  QString text, QString *arrayText)
+bool MainWindow::checkWordInArray(int idexText,  QString key, QString *arrayText)
 {
     for(int i=0;i<16;i++)
     {
-        if(text[idexText]==arrayText[i] || text[idexText]==" ") return false;
+        if(key[idexText]==arrayText[i] || key[idexText]==" ") return false;
     }
     return true;
 }
@@ -179,16 +181,16 @@ bool MainWindow::checkWordInAlph(int indexAlph,QString *alph, QString *arrayText
     return true;
 }
 
-void MainWindow::createNewAlph(QString text,QString *alph)
+void MainWindow::createNewAlph(QString key,QString *alph)
 {
     QString arrayText[16]={0};
     QString arrayLast[16]={0};
     QString lastWord;
     for(int idexText=0, indexArrey=0; indexArrey<16; idexText++) // алгоритм заполнения верхнего массива (текстового по ключу)
     {
-            if(checkWordInArray(idexText,text,arrayText))
+            if(checkWordInArray(idexText,key,arrayText))
             {
-                arrayText[indexArrey] = text[idexText];
+                arrayText[indexArrey] = key[idexText];
                 indexArrey++;
 
         }
@@ -225,17 +227,176 @@ bool exit=false;
         }
 
     }
+}
+
+QString MainWindow::translateText(QString key,QString *alph)
+{
+    QString newText;
+    QString alphDefault[32] = {"а", "б", "в", "г", "д", "е", "ж", "з", "и","й","к", "л", "м", "н", "о", "п", "р", "с", "т",
+                        "у", "ф", "х", "ц", "ч", "ш", "щ", "ъ", "ы", "ь", "э", "ю", "я"};
+    for(int i = 0; i<key.length();i++)
+    {
+        for(int indexAlph=0;indexAlph<32;indexAlph++)
+        {
+            if(key[i]==alphDefault[indexAlph]) newText+= alph[indexAlph];
+        }
+    }
+    for(int i = 0; i<32;i++)
+    {
+        alph[i]=alphDefault[i];
+    }
+return newText;
+}
+
+void MainWindow::createNewAlphConstant(QString *alph)
+{
+    QString alphDefault[32] = {"а", "б", "в", "г", "д", "е", "ж", "з", "и","й","к", "л", "м", "н", "о", "п", "р", "с", "т",
+                        "у", "ф", "х", "ц", "ч", "ш", "щ", "ъ", "ы", "ь", "э", "ю", "я"};
+    int costil=0, costil2=32-const_num;
+
+    for(int i = 0;i<32;i++)
+    {
+        if(i<const_num)
+        {
+            alph[i]=alphDefault[costil2];
+            costil2++;
+            continue;
+        }
+        if(i>31-const_num)
+        {
+            alph[i]=alphDefault[costil];
+            costil++;
+            continue;
+        }
+        alph[i]=alphDefault[i-const_num];
+    }
 
 }
 
-void MainWindow::lab2(QString text)
+void MainWindow::lab2(QString key, QString text)
 {
     QString alph[32] = {"а", "б", "в", "г", "д", "е", "ж", "з", "и","й","к", "л", "м", "н", "о", "п", "р", "с", "т",
                         "у", "ф", "х", "ц", "ч", "ш", "щ", "ъ", "ы", "ь", "э", "ю", "я"};
-    text.toLower();
-    createNewAlph(text,alph);
 
-    ui->debugedit->setText(debug);
+    key = key.toLower();
+    text = text.toLower();
+    int N;
+    double h, hh = 0;
+    double ni;
+    int m = 32;
+    double a, b;
+///////////////////////////////////////////// 1
+    QString newText1;
+    createNewAlph(text,alph);
+    newText1 = translateText(text,alph);
+    QVector<int> bit_array_one;
+    QVector<int> decimal_array_one;
+    Word(newText1, bit_array_one);
+    convertBinareDecimal(bit_array_one, decimal_array_one);
+
+    N = decimal_array_one.length();
+    hh = 0;
+    a = MinValue(decimal_array_one, N);
+    b = MaxValue(decimal_array_one, N);
+    h = 1;
+    QVector<double> x1(m), y1(m);
+    for (int i = 0; i < m; i++) {
+        ni = 0;
+        for (int j = 0; j < N; j++) {
+            if (decimal_array_one[j] >= double(a) + hh and decimal_array_one[j] < double(a) + hh + h) ni++;
+            else continue;
+        }
+        x1[i] = double(a) + hh + (h / 2);
+        y1[i] = ni;
+        hh += h;
+    }
+    double first_maxY = 1;
+       for (int i = 0; i < m; i++) {
+           if (y1[i] > first_maxY) first_maxY = y1[i];
+       }
+    ui->plot1->xAxis->setRange(0, 32);
+    ui->plot1->yAxis->setRange(0, first_maxY); //сюда надо вставить максимальное h
+    QCPBars *bars1 = new QCPBars(ui->plot1->xAxis, ui->plot1->yAxis);
+    bars1->setData(x1, y1, true);
+    bars1->setWidth(h);
+    ui->plot1->replot();
+///////////////////////////////////////////// 2 -константа
+    QString newText2;
+    createNewAlphConstant(alph);
+    newText2 = translateText(text,alph);
+    QVector<int> bit_array_two;
+    QVector<int> decimal_array_two;
+    Word(newText2, bit_array_two);
+    convertBinareDecimal(bit_array_two, decimal_array_two);
+
+    N = decimal_array_two.length();
+    hh = 0;
+    a = MinValue(decimal_array_two, N);
+    b = MaxValue(decimal_array_two, N);
+    h = 1;
+    QVector<double> x2(m), y2(m);
+    for (int i = 0; i < m; i++) {
+        ni = 0;
+        for (int j = 0; j < N; j++) {
+            if (decimal_array_two[j] >= double(a) + hh and decimal_array_two[j] < double(a) + hh + h) ni++;
+            else continue;
+        }
+        x2[i] = double(a) + hh + (h / 2);
+        y2[i] = ni;
+        hh += h;
+    }
+     first_maxY = 1;
+       for (int i = 0; i < m; i++) {
+           if (y2[i] > first_maxY) first_maxY = y2[i];
+       }
+    ui->plot2->xAxis->setRange(0, 32);
+    ui->plot2->yAxis->setRange(0, first_maxY); //сюда надо вставить максимальное h
+    QCPBars *bars2 = new QCPBars(ui->plot2->xAxis, ui->plot2->yAxis);
+    bars2->setData(x2, y2, true);
+    bars2->setWidth(h);
+    ui->plot2->replot();
+
+
+    //ui->debugedit->setText(debug);
+
+///////////////////////////////////////////// 3
+
+    QString newText3;
+    createNewAlph(key,alph);
+    newText3 = translateText(text,alph);
+    QVector<int> bit_array_tree;
+    QVector<int> decimal_array_tree;
+    Word(newText3, bit_array_tree);
+    convertBinareDecimal(bit_array_tree, decimal_array_tree);
+
+    N = decimal_array_tree.length();
+    hh = 0;
+    a = MinValue(decimal_array_tree, N);
+    b = MaxValue(decimal_array_tree, N);
+    h = 1;
+    QVector<double> x3(m), y3(m);
+    for (int i = 0; i < m; i++) {
+        ni = 0;
+        for (int j = 0; j < N; j++) {
+            if (decimal_array_tree[j] >= double(a) + hh and decimal_array_tree[j] < double(a) + hh + h) ni++;
+            else continue;
+        }
+        x3[i] = double(a) + hh + (h / 2);
+        y3[i] = ni;
+        hh += h;
+    }
+     first_maxY = 1;
+       for (int i = 0; i < m; i++) {
+           if (y3[i] > first_maxY) first_maxY = y3[i];
+       }
+    ui->plot3->xAxis->setRange(0, 32);
+    ui->plot3->yAxis->setRange(0, first_maxY); //сюда надо вставить максимальное h
+    QCPBars *bars3 = new QCPBars(ui->plot3->xAxis, ui->plot3->yAxis);
+    bars3->setData(x3, y3, true);
+    bars3->setWidth(h);
+    ui->plot3->replot();
+ ///////////////////////////////////////////// 4
+
 }
 
 void MainWindow::on_pushButton_clicked() {
@@ -250,14 +411,25 @@ void MainWindow::on_pushButton_clicked() {
     ui->plot4->clearPlottables();
 
     ui->textPlot->clearPlottables();
-    ui->textEdit->setText("железный шпиц дома лежит");
+
     QString text = ui->textEdit->toPlainText(); //ввод с окна
     QString k0 = ui->lineEdit_4->text();
     QString k1 = ui->lineEdit_3->text();
     QString p0 = ui->lineEdit->text();
     QString c0 = ui->lineEdit_2->text();
 
-    lab2(text);
+    QString key = ui->key->text(); //ввод с окна
+
+    if(key=="")
+    {
+        //ui->key->setText("Сурьма косых глаз не исправит");
+        //key="Сурьма косых глаз не исправит";
+
+        ui->key->setText("Железный шпиц дома лежит");
+        key="Железный шпиц дома лежит";
+    }
+
+    lab2(key,text);
 
     int K0[5];
     int K1[5];

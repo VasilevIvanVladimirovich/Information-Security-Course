@@ -40,11 +40,15 @@ public:
 
     void createNewAlph(QString text,QString *alph);
 
-    bool checkWordInArray(int idexText,  QString text, QString *arrayText);
+    bool checkWordInArray(int idexText,  QString key, QString *arrayText);
 
     bool checkWordInAlph(int indexAlph, QString *alph, QString *arrayText);
 
-    void lab2(QString text);
+    QString translateText(QString key,QString *alph);
+
+    void createNewAlphConstant(QString *alph);
+
+    void lab2(QString key,QString text);
 
     ~MainWindow();
 
