@@ -2,13 +2,21 @@
 #include "ui_mainwindow.h"
 #include "qcustomplot.h"
 
-
 const int const_num=4;
+
 QString debug="";
 
 MainWindow::MainWindow(QWidget *parent)
         : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
+    ui->Round1->setReadOnly(true);
+    ui->Round2->setReadOnly(true);
+    ui->Round3->setReadOnly(true);
+    ui->Round4->setReadOnly(true);
+    ui->Round5->setReadOnly(true);
+    ui->Round6->setReadOnly(true);
+    ui->Round7->setReadOnly(true);
+    ui->Round8->setReadOnly(true);
 }
 
 MainWindow::~MainWindow() {
@@ -96,7 +104,7 @@ void MainWindow::ECB(QVector<int> &bit_array, QVector<int> &ECB_out_bit, int *K0
     }
 }
 
-void convertBinareDecimal(QVector<int> &out_bit, QVector<int> &ECB_out) {
+void MainWindow::convertBinareDecimal(QVector<int> &out_bit, QVector<int> &ECB_out) {
     int sum;
     for (int i = 0; i < out_bit.length(); i += 5) {
         sum = 0;
@@ -121,6 +129,7 @@ void MainWindow::CPC(QVector<int> &bit_array, QVector<int> &CPC_out_bit, int *C0
         else if (CPC_out_bit[i] == 1) CPC_out_bit[i] = 0;
         for (int k = 0; k < 5; k++) C[k] = CPC_out_bit[k + i];
     }
+    //Этот код написал я, Василье Иван :D !
 }
 
 void MainWindow::sumArray(int *arr1, int *arr2, int *result) {
@@ -350,6 +359,7 @@ void MainWindow::lab2(QString key, QString text)
     bars1->setWidth(h);
     ui->plot1->replot();
 ///////////////////////////////////////////// 2 -константа
+
     QString newText2;
     createNewAlphConstant(alph);
     newText2 = translateText(text,alph);
@@ -384,8 +394,6 @@ void MainWindow::lab2(QString key, QString text)
     bars2->setWidth(h);
     ui->plot2->replot();
 
-
-    ui->debugedit->setText(debug);
 
 ///////////////////////////////////////////// 3
 
@@ -471,7 +479,466 @@ void MainWindow::lab2(QString key, QString text)
       ui->plot4->replot();
 }
 
+void MainWindow::bin8bit(int n, QVector<int> &bit_array) //функция перевода числа в двоичную систему счисления
+{
+    int arr[8];
+    for (int i = 7; i >= 0; i--) {
+        arr[i] = n % 2;
+        n = n / 2;
+    }
+    for (int i = 0; i < 8; i++) {
+        bit_array.push_back(arr[i]);
+    }
+}
+
+void MainWindow::WordEightBit(QString str, QVector<int> &bit_array,bool iskey) // функция перевода строки в двоичный код
+{
+    int *arr_num = new int[str.length()];
+    QString smal[32] = {"а", "б", "в", "г", "д", "е", "ж", "з", "и", "й", "к", "л", "м", "н", "о", "п", "р", "с", "т",
+                        "у", "ф", "х", "ц", "ч", "ш", "щ", "ъ", "ы", "ь", "э", "ю", "я"};
+    QString big[32] = {"А", "Б", "В", "Г", "Д", "Е", "Ж", "З", "И", "Й", "К", "Л", "М", "Н", "О", "П", "Р", "С", "Т",
+                       "У", "Ф", "Х", "Ц", "Ч", "Ш", "Щ", "Ъ", "Ы", "Ь", "Э", "Ю", "Я"};
+if(!iskey){
+    if(str.length()/2!=0)
+    {
+        for(int i = 0;i<8;i++) bit_array.push_back(0);
+    }
+}
+    for (int i = 0; i < str.length(); i++) //перебор символов и запись их в вектор двоичных чисел
+    {
+        for (int j = 0; j < 32; j++) {
+            if (str[i] == smal[j]) {
+                arr_num[i] = j;
+                bin8bit(arr_num[i], bit_array);
+                break;
+            } else if (str[i] == big[j]) {
+                arr_num[i] = j;
+                bin8bit(arr_num[i], bit_array);
+                break;
+            }
+        }
+    }
+    delete[] arr_num;
+}
+
+void MainWindow::sumArray2(int *arr1, int *arr2, int *result) {
+    for (int i = 0; i < 8; i++)
+    {
+        if ((arr1[i] == 1 && arr2[i] == 1) || (arr1[i] == 0 && arr2[i] == 0)) result[i] = 0;
+        if ((arr1[i] == 1 && arr2[i] == 0) || (arr1[i] == 0 && arr2[i] == 1)) result[i] = 1;
+    }
+}
+
+void MainWindow::sdvig(int *result)
+{
+    int buffer[8];
+
+    for(int i = 0;i<8;i++)
+    {
+        if(i==3) //00010010
+        {
+            buffer[7]=result[i];
+            continue;
+        }
+
+        buffer[i-1]=result[i];
+    }
+    for(int i = 0;i<8;i++)
+    {
+        result[i]=buffer[i];
+    }
+
+}
+
+void MainWindow::round(QVector<int> &bit_array_text,int NumRound, QVector<int> &bit_array_key)
+{
+    int left[8];
+    int right[8];
+    int key[8];
+    int result[8];
+    QVector<int> buffer;
+    NumRound--;
+
+    for(int rezakEpta=0; rezakEpta<8;rezakEpta++)
+    {
+        key[rezakEpta] = bit_array_key[rezakEpta+NumRound*8];
+    }
+
+
+    for(int rezak = 0; rezak<bit_array_text.length();rezak+=16)
+    {
+        for(int i=0;i<8;i++) left[i]=bit_array_text[i+rezak];
+        for(int i=0;i<8;i++) right[i]=bit_array_text[i+rezak+8];
+
+        sumArray2(right,key,result);
+        sdvig(result);
+
+        if(NumRound!=7)
+        {
+            for(int i=0;i<8;i++)
+            {
+               right[i]=left[i];
+               left[i]=result[i];
+            }
+        }else
+        {
+            for(int i=0;i<8;i++) left[i]=result[i];
+         }
+        for(int i = 0;i<8;i++) buffer.push_back(left[i]);
+        for(int i = 0;i<8;i++) buffer.push_back(right[i]);
+
+    }
+       bit_array_text.clear();
+       bit_array_text=buffer;
+}
+
+void MainWindow::rubka(QVector<int> &bit_array,QVector<int> &decimal_array)
+{
+    QVector<int> buffer;
+    for(int i=3;i<bit_array.length();i+=8)
+    {
+        for(int j=0;j<5;j++)
+        {
+            buffer.push_back(bit_array[i+j]);
+        }
+        convertBinareDecimal(buffer, decimal_array);
+        buffer.clear();
+    }
+}
+
+QString MainWindow::convertDecimalWords(QVector<int> DecimalArr)
+{
+    QString stringOut;
+    QString alph[32] = {"а", "б", "в", "г", "д", "е", "ж", "з", "и","й","к", "л", "м", "н", "о", "п", "р", "с", "т",
+                        "у", "ф", "х", "ц", "ч", "ш", "щ", "ъ", "ы", "ь", "э", "ю", "я"};
+
+    for(int i =0;i<DecimalArr.length();i++)
+    {
+        stringOut+=alph[DecimalArr[i]];
+    }
+    return stringOut;
+
+}
+
+void MainWindow::lab3(QString text,QString key)
+{
+    QVector<int> bit_array_text;
+    QVector<int> bit_array_keys;
+
+    QVector<int> bit_one;
+    QVector<int> decimal_one;
+
+    QVector<int> bit_two;
+    QVector<int> decimal_two;
+
+    QVector<int> bit_tree;
+    QVector<int> decimal_tree;
+
+    QVector<int> bit_four;
+    QVector<int> decimal_four;
+
+    QVector<int> bit_five;
+    QVector<int> decimal_five;
+
+    QVector<int> bit_six;
+    QVector<int> decimal_six;
+
+    QVector<int> bit_seven;
+    QVector<int> decimal_seven;
+
+    QVector<int> bit_eight;
+    QVector<int> decimal_eight;
+
+    WordEightBit(text, bit_array_text,false);
+
+    WordEightBit(key,bit_array_keys,true);
+
+
+    bit_one=bit_array_text;
+    round(bit_one,1,bit_array_keys);
+    rubka(bit_one,decimal_one);
+
+    for(int i =0;i<decimal_one.length();i++) debug+=QString::number(decimal_one[i])+" ";
+
+    ui->debugedit->setText(debug);
+
+    ui->Round1->setText(convertDecimalWords(decimal_one));
+
+    bit_two=bit_one;
+    round(bit_two,2,bit_array_keys);
+    rubka(bit_two,decimal_two);
+
+    ui->Round2->setText(convertDecimalWords(decimal_two));
+
+    bit_tree=bit_two;
+    round(bit_tree,3,bit_array_keys);
+    rubka(bit_tree,decimal_tree);
+
+    ui->Round3->setText(convertDecimalWords(decimal_tree));
+
+    bit_four=bit_tree;
+    round(bit_four,4,bit_array_keys);
+    rubka(bit_four,decimal_four);
+
+    ui->Round4->setText(convertDecimalWords(decimal_four));
+
+    bit_five=bit_four;
+    round(bit_five,5,bit_array_keys);
+    rubka(bit_five,decimal_five);
+
+    ui->Round5->setText(convertDecimalWords(decimal_five));
+
+    bit_six=bit_five;
+    round(bit_six,6,bit_array_keys);
+    rubka(bit_six,decimal_six);
+
+    ui->Round6->setText(convertDecimalWords(decimal_six));
+
+    bit_seven=bit_six;
+    round(bit_seven,7,bit_array_keys);
+    rubka(bit_seven,decimal_seven);
+
+    ui->Round7->setText(convertDecimalWords(decimal_seven));
+
+    bit_eight=bit_seven;
+    round(bit_eight,8,bit_array_keys);
+    rubka(bit_eight,decimal_eight);
+
+    ui->Round8->setText(convertDecimalWords(decimal_eight));
+
+    int N = text.length();
+    double h, hh = 0;
+    double ni;
+    int m = 32;
+    double a, b;
+////////////////////////////////////////////1
+
+    a = MinValue(decimal_one, N);
+    b = MaxValue(decimal_one, N);
+    h = 1;
+
+    QVector<double> x1(m), y1(m);
+    for (int i = 0; i < m; i++) {
+        ni = 0;
+        for (int j = 0; j < N; j++) {
+            if (decimal_one[j] >= double(a) + hh and decimal_one[j] < double(a) + hh + h) ni++;
+            else continue;
+
+        }
+        x1[i] = double(a) + hh + (h / 2);
+        y1[i] = ni;
+        hh += h;
+    }
+    double first_maxY = 1;
+    for (int i = 0; i < m; i++) {
+        if (y1[i] > first_maxY) first_maxY = y1[i];
+    }
+    ui->one->xAxis->setRange(0, 32);
+    ui->one->yAxis->setRange(0, first_maxY);
+    QCPBars *bars1 = new QCPBars(ui->one->xAxis, ui->one->yAxis);
+    bars1->setData(x1, y1, true);
+    bars1->setWidth(h);
+    ui->one->replot();
+
+////////////////////////////////////////////1
+
+        a = MinValue(decimal_two, N);
+        b = MaxValue(decimal_two, N);
+        h = 1;
+        hh=0;
+        QVector<double> x2(m), y2(m);
+        for (int i = 0; i < m; i++) {
+            ni = 0;
+            for (int j = 0; j < N; j++) {
+                if (decimal_two[j] >= double(a) + hh and decimal_two[j] < double(a) + hh + h) ni++;
+                else continue;
+
+            }
+            x2[i] = double(a) + hh + (h / 2);
+            y2[i] = ni;
+            hh += h;
+        }
+        first_maxY = 1;
+        for (int i = 0; i < m; i++) {
+            if (y2[i] > first_maxY) first_maxY = y2[i];
+        }
+        ui->two->xAxis->setRange(0, 32);
+        ui->two->yAxis->setRange(0, first_maxY);
+        QCPBars *barstwo = new QCPBars(ui->two->xAxis, ui->two->yAxis);
+        barstwo->setData(x2, y2, true);
+        barstwo->setWidth(h);
+        ui->two->replot();
+////////////////////////////////////////////3
+         a = MinValue(decimal_tree, N);
+        b = MaxValue(decimal_tree, N);
+        h = 1;
+        hh=0;
+        QVector<double> x3(m), y3(m);
+        for (int i = 0; i < m; i++) {
+            ni = 0;
+            for (int j = 0; j < N; j++) {
+                if (decimal_tree[j] >= double(a) + hh and decimal_tree[j] < double(a) + hh + h) ni++;
+                else continue;
+
+            }
+            x3[i] = double(a) + hh + (h / 2);
+            y3[i] = ni;
+            hh += h;
+        }
+        first_maxY = 1;
+        for (int i = 0; i < m; i++) {
+            if (y3[i] > first_maxY) first_maxY = y3[i];
+        }
+        ui->tree->xAxis->setRange(0, 32);
+        ui->tree->yAxis->setRange(0, first_maxY);
+        QCPBars *barstree = new QCPBars(ui->tree->xAxis, ui->tree->yAxis);
+        barstree->setData(x3, y3, true);
+        barstree->setWidth(h);
+        ui->tree->replot();
+
+        ////////////////////////////////////////////4
+                 a = MinValue(decimal_four, N);
+                b = MaxValue(decimal_four, N);
+                h = 1;
+                hh=0;
+                QVector<double> x4(m), y4(m);
+                for (int i = 0; i < m; i++) {
+                    ni = 0;
+                    for (int j = 0; j < N; j++) {
+                        if (decimal_four[j] >= double(a) + hh and decimal_four[j] < double(a) + hh + h) ni++;
+                        else continue;
+
+                    }
+                    x4[i] = double(a) + hh + (h / 2);
+                    y4[i] = ni;
+                    hh += h;
+                }
+                first_maxY = 1;
+                for (int i = 0; i < m; i++) {
+                    if (y4[i] > first_maxY) first_maxY = y4[i];
+                }
+                ui->four->xAxis->setRange(0, 32);
+                ui->four->yAxis->setRange(0, first_maxY);
+                QCPBars *barsfour = new QCPBars(ui->four->xAxis, ui->four->yAxis);
+                barsfour->setData(x4, y4, true);
+                barsfour->setWidth(h);
+                ui->four->replot();
+                ////////////////////////////////////////////5
+                         a = MinValue(decimal_five, N);
+                        b = MaxValue(decimal_five, N);
+                        h = 1;
+                        hh=0;
+                        QVector<double> x5(m), y5(m);
+                        for (int i = 0; i < m; i++) {
+                            ni = 0;
+                            for (int j = 0; j < N; j++) {
+                                if (decimal_five[j] >= double(a) + hh and decimal_five[j] < double(a) + hh + h) ni++;
+                                else continue;
+
+                            }
+                            x5[i] = double(a) + hh + (h / 2);
+                            y5[i] = ni;
+                            hh += h;
+                        }
+                        first_maxY = 1;
+                        for (int i = 0; i < m; i++) {
+                            if (y5[i] > first_maxY) first_maxY = y5[i];
+                        }
+                        ui->five->xAxis->setRange(0, 32);
+                        ui->five->yAxis->setRange(0, first_maxY);
+                        QCPBars *barsfive = new QCPBars(ui->five->xAxis, ui->five->yAxis);
+                        barsfive->setData(x5, y5, true);
+                        barsfive->setWidth(h);
+                        ui->five->replot();
+                        ////////////////////////////////////////////6
+                                a = MinValue(decimal_six, N);
+                                b = MaxValue(decimal_six, N);
+                                h = 1;
+                                hh=0;
+                                QVector<double> x6(m), y6(m);
+                                for (int i = 0; i < m; i++) {
+                                    ni = 0;
+                                    for (int j = 0; j < N; j++) {
+                                        if (decimal_six[j] >= double(a) + hh and decimal_six[j] < double(a) + hh + h) ni++;
+                                        else continue;
+
+                                    }
+                                    x6[i] = double(a) + hh + (h / 2);
+                                    y6[i] = ni;
+                                    hh += h;
+                                }
+                                first_maxY = 1;
+                                for (int i = 0; i < m; i++) {
+                                    if (y6[i] > first_maxY) first_maxY = y6[i];
+                                }
+                                ui->six->xAxis->setRange(0, 32);
+                                ui->six->yAxis->setRange(0, first_maxY);
+                                QCPBars *barssix = new QCPBars(ui->six->xAxis, ui->six->yAxis);
+                                barssix->setData(x6, y6, true);
+                                barssix->setWidth(h);
+                                ui->six->replot();
+
+////////////////////////////////////////////7
+                                                a = MinValue(decimal_seven, N);
+                                                b = MaxValue(decimal_seven, N);
+                                                h = 1;
+                                                hh=0;
+                                                QVector<double> x7(m), y7(m);
+                                                for (int i = 0; i < m; i++) {
+                                                    ni = 0;
+                                                    for (int j = 0; j < N; j++) {
+                                                        if (decimal_seven[j] >= double(a) + hh and decimal_seven[j] < double(a) + hh + h) ni++;
+                                                        else continue;
+
+                                                    }
+                                                    x7[i] = double(a) + hh + (h / 2);
+                                                    y7[i] = ni;
+                                                    hh += h;
+                                                }
+                                                first_maxY = 1;
+                                                for (int i = 0; i < m; i++) {
+                                                    if (y7[i] > first_maxY) first_maxY = y7[i];
+                                                }
+                                                ui->seven->xAxis->setRange(0, 32);
+                                                ui->seven->yAxis->setRange(0, first_maxY);
+                                                QCPBars *barsseven = new QCPBars(ui->seven->xAxis, ui->seven->yAxis);
+                                                barsseven->setData(x7, y7, true);
+                                                barsseven->setWidth(h);
+                                                ui->seven->replot();
+                                                ////////////////////////////////////////////8
+                                                        a = MinValue(decimal_eight, N);
+                                                        b = MaxValue(decimal_eight, N);
+                                                        h = 1;
+                                                        hh=0;
+                                                        QVector<double> x8(m), y8(m);
+                                                        for (int i = 0; i < m; i++) {
+                                                            ni = 0;
+                                                            for (int j = 0; j < N; j++) {
+                                                                if (decimal_eight[j] >= double(a) + hh and decimal_eight[j] < double(a) + hh + h) ni++;
+                                                                else continue;
+
+                                                            }
+                                                            x8[i] = double(a) + hh + (h / 2);
+                                                            y8[i] = ni;
+                                                            hh += h;
+                                                        }
+                                                        first_maxY = 1;
+                                                        for (int i = 0; i < m; i++) {
+                                                            if (y8[i] > first_maxY) first_maxY = y8[i];
+                                                        }
+                                                        ui->eight->xAxis->setRange(0, 32);
+                                                        ui->eight->yAxis->setRange(0, first_maxY);
+                                                        QCPBars *barseight = new QCPBars(ui->eight->xAxis, ui->eight->yAxis);
+                                                        barseight->setData(x8, y8, true);
+                                                        barseight->setWidth(h);
+                                                        ui->eight->replot();
+
+
+}
+
 void MainWindow::on_pushButton_clicked() {
+    ui->debugedit->setText(" ");
+
     ui->OFB->clearPlottables(); //очистка гистограмм
     ui->CPC->clearPlottables();
     ui->CFB->clearPlottables();
@@ -482,7 +949,25 @@ void MainWindow::on_pushButton_clicked() {
     ui->plot3->clearPlottables();
     ui->plot4->clearPlottables();
 
+    ui->one->clearPlottables();
+    ui->two->clearPlottables();
+    ui->tree->clearPlottables();
+    ui->four->clearPlottables();
+    ui->five->clearPlottables();
+    ui->six->clearPlottables();
+    ui->seven->clearPlottables();
+    ui->eight->clearPlottables();
+
     ui->textPlot->clearPlottables();
+
+    ui->Round1->clear();
+    ui->Round2->clear();
+    ui->Round3->clear();
+    ui->Round4->clear();
+    ui->Round5->clear();
+    ui->Round6->clear();
+    ui->Round7->clear();
+    ui->Round8->clear();
 
     QString text = ui->textEdit->toPlainText(); //ввод с окна
     QString k0 = ui->lineEdit_4->text();
@@ -501,7 +986,8 @@ void MainWindow::on_pushButton_clicked() {
         key="Железный шпиц дома лежит";
     }
 
-    lab2(key,text);
+    //lab2(key,text);
+    lab3(text,key);
 
     int K0[5];
     int K1[5];

@@ -69,6 +69,51 @@ public:
     QCustomPlot *plot2;
     QLabel *label_14;
     QCustomPlot *plot4;
+    QWidget *tab;
+    QVBoxLayout *verticalLayout_6;
+    QHBoxLayout *horizontalLayout_3;
+    QVBoxLayout *verticalLayout_11;
+    QLabel *label_16;
+    QCustomPlot *one;
+    QLabel *label_18;
+    QCustomPlot *five;
+    QVBoxLayout *verticalLayout_13;
+    QLabel *label_20;
+    QCustomPlot *two;
+    QLabel *label_21;
+    QCustomPlot *six;
+    QVBoxLayout *verticalLayout_12;
+    QLabel *label_17;
+    QCustomPlot *tree;
+    QLabel *label_19;
+    QCustomPlot *seven;
+    QVBoxLayout *verticalLayout_15;
+    QLabel *label_22;
+    QCustomPlot *four;
+    QLabel *label_23;
+    QCustomPlot *eight;
+    QWidget *tab_2;
+    QHBoxLayout *horizontalLayout_6;
+    QVBoxLayout *verticalLayout_5;
+    QLabel *label_24;
+    QTextEdit *Round1;
+    QLabel *label_25;
+    QTextEdit *Round5;
+    QVBoxLayout *verticalLayout_14;
+    QLabel *label_26;
+    QTextEdit *Round2;
+    QLabel *label_27;
+    QTextEdit *Round6;
+    QVBoxLayout *verticalLayout_16;
+    QLabel *label_28;
+    QTextEdit *Round3;
+    QLabel *label_29;
+    QTextEdit *Round7;
+    QVBoxLayout *verticalLayout_17;
+    QLabel *label_30;
+    QTextEdit *Round4;
+    QLabel *label_31;
+    QTextEdit *Round8;
     QWidget *tab_4;
     QVBoxLayout *verticalLayout_8;
     QHBoxLayout *horizontalLayout_5;
@@ -89,7 +134,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(1263, 834);
+        MainWindow->resize(2481, 1109);
         MainWindow->setMinimumSize(QSize(500, 500));
         QFont font;
         font.setFamily(QString::fromUtf8("Aero Matics"));
@@ -279,6 +324,237 @@ public:
         verticalLayout_2->addLayout(horizontalLayout_2);
 
         tabWidget->addTab(lab2, QString());
+        tab = new QWidget();
+        tab->setObjectName(QString::fromUtf8("tab"));
+        verticalLayout_6 = new QVBoxLayout(tab);
+        verticalLayout_6->setObjectName(QString::fromUtf8("verticalLayout_6"));
+        horizontalLayout_3 = new QHBoxLayout();
+        horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
+        verticalLayout_11 = new QVBoxLayout();
+        verticalLayout_11->setObjectName(QString::fromUtf8("verticalLayout_11"));
+        label_16 = new QLabel(tab);
+        label_16->setObjectName(QString::fromUtf8("label_16"));
+        label_16->setMaximumSize(QSize(16777215, 50));
+
+        verticalLayout_11->addWidget(label_16);
+
+        one = new QCustomPlot(tab);
+        one->setObjectName(QString::fromUtf8("one"));
+        one->setMinimumSize(QSize(450, 250));
+
+        verticalLayout_11->addWidget(one);
+
+        label_18 = new QLabel(tab);
+        label_18->setObjectName(QString::fromUtf8("label_18"));
+        label_18->setMaximumSize(QSize(16777215, 50));
+
+        verticalLayout_11->addWidget(label_18);
+
+        five = new QCustomPlot(tab);
+        five->setObjectName(QString::fromUtf8("five"));
+        five->setMinimumSize(QSize(450, 250));
+
+        verticalLayout_11->addWidget(five);
+
+
+        horizontalLayout_3->addLayout(verticalLayout_11);
+
+        verticalLayout_13 = new QVBoxLayout();
+        verticalLayout_13->setObjectName(QString::fromUtf8("verticalLayout_13"));
+        label_20 = new QLabel(tab);
+        label_20->setObjectName(QString::fromUtf8("label_20"));
+        label_20->setMaximumSize(QSize(16777215, 50));
+
+        verticalLayout_13->addWidget(label_20);
+
+        two = new QCustomPlot(tab);
+        two->setObjectName(QString::fromUtf8("two"));
+        two->setMinimumSize(QSize(450, 250));
+
+        verticalLayout_13->addWidget(two);
+
+        label_21 = new QLabel(tab);
+        label_21->setObjectName(QString::fromUtf8("label_21"));
+        label_21->setMaximumSize(QSize(16777215, 50));
+
+        verticalLayout_13->addWidget(label_21);
+
+        six = new QCustomPlot(tab);
+        six->setObjectName(QString::fromUtf8("six"));
+        six->setMinimumSize(QSize(450, 250));
+
+        verticalLayout_13->addWidget(six);
+
+
+        horizontalLayout_3->addLayout(verticalLayout_13);
+
+        verticalLayout_12 = new QVBoxLayout();
+        verticalLayout_12->setObjectName(QString::fromUtf8("verticalLayout_12"));
+        label_17 = new QLabel(tab);
+        label_17->setObjectName(QString::fromUtf8("label_17"));
+        label_17->setMaximumSize(QSize(16777215, 50));
+
+        verticalLayout_12->addWidget(label_17);
+
+        tree = new QCustomPlot(tab);
+        tree->setObjectName(QString::fromUtf8("tree"));
+        tree->setMinimumSize(QSize(450, 250));
+
+        verticalLayout_12->addWidget(tree);
+
+        label_19 = new QLabel(tab);
+        label_19->setObjectName(QString::fromUtf8("label_19"));
+        label_19->setMaximumSize(QSize(16777215, 50));
+
+        verticalLayout_12->addWidget(label_19);
+
+        seven = new QCustomPlot(tab);
+        seven->setObjectName(QString::fromUtf8("seven"));
+        seven->setMinimumSize(QSize(450, 250));
+
+        verticalLayout_12->addWidget(seven);
+
+
+        horizontalLayout_3->addLayout(verticalLayout_12);
+
+        verticalLayout_15 = new QVBoxLayout();
+        verticalLayout_15->setObjectName(QString::fromUtf8("verticalLayout_15"));
+        label_22 = new QLabel(tab);
+        label_22->setObjectName(QString::fromUtf8("label_22"));
+        label_22->setMaximumSize(QSize(16777215, 50));
+
+        verticalLayout_15->addWidget(label_22);
+
+        four = new QCustomPlot(tab);
+        four->setObjectName(QString::fromUtf8("four"));
+        four->setMinimumSize(QSize(450, 250));
+
+        verticalLayout_15->addWidget(four);
+
+        label_23 = new QLabel(tab);
+        label_23->setObjectName(QString::fromUtf8("label_23"));
+        label_23->setMaximumSize(QSize(16777215, 50));
+
+        verticalLayout_15->addWidget(label_23);
+
+        eight = new QCustomPlot(tab);
+        eight->setObjectName(QString::fromUtf8("eight"));
+        eight->setMinimumSize(QSize(450, 250));
+
+        verticalLayout_15->addWidget(eight);
+
+
+        horizontalLayout_3->addLayout(verticalLayout_15);
+
+
+        verticalLayout_6->addLayout(horizontalLayout_3);
+
+        tabWidget->addTab(tab, QString());
+        tab_2 = new QWidget();
+        tab_2->setObjectName(QString::fromUtf8("tab_2"));
+        horizontalLayout_6 = new QHBoxLayout(tab_2);
+        horizontalLayout_6->setObjectName(QString::fromUtf8("horizontalLayout_6"));
+        verticalLayout_5 = new QVBoxLayout();
+        verticalLayout_5->setObjectName(QString::fromUtf8("verticalLayout_5"));
+        label_24 = new QLabel(tab_2);
+        label_24->setObjectName(QString::fromUtf8("label_24"));
+
+        verticalLayout_5->addWidget(label_24);
+
+        Round1 = new QTextEdit(tab_2);
+        Round1->setObjectName(QString::fromUtf8("Round1"));
+
+        verticalLayout_5->addWidget(Round1);
+
+        label_25 = new QLabel(tab_2);
+        label_25->setObjectName(QString::fromUtf8("label_25"));
+
+        verticalLayout_5->addWidget(label_25);
+
+        Round5 = new QTextEdit(tab_2);
+        Round5->setObjectName(QString::fromUtf8("Round5"));
+
+        verticalLayout_5->addWidget(Round5);
+
+
+        horizontalLayout_6->addLayout(verticalLayout_5);
+
+        verticalLayout_14 = new QVBoxLayout();
+        verticalLayout_14->setObjectName(QString::fromUtf8("verticalLayout_14"));
+        label_26 = new QLabel(tab_2);
+        label_26->setObjectName(QString::fromUtf8("label_26"));
+
+        verticalLayout_14->addWidget(label_26);
+
+        Round2 = new QTextEdit(tab_2);
+        Round2->setObjectName(QString::fromUtf8("Round2"));
+
+        verticalLayout_14->addWidget(Round2);
+
+        label_27 = new QLabel(tab_2);
+        label_27->setObjectName(QString::fromUtf8("label_27"));
+
+        verticalLayout_14->addWidget(label_27);
+
+        Round6 = new QTextEdit(tab_2);
+        Round6->setObjectName(QString::fromUtf8("Round6"));
+
+        verticalLayout_14->addWidget(Round6);
+
+
+        horizontalLayout_6->addLayout(verticalLayout_14);
+
+        verticalLayout_16 = new QVBoxLayout();
+        verticalLayout_16->setObjectName(QString::fromUtf8("verticalLayout_16"));
+        label_28 = new QLabel(tab_2);
+        label_28->setObjectName(QString::fromUtf8("label_28"));
+
+        verticalLayout_16->addWidget(label_28);
+
+        Round3 = new QTextEdit(tab_2);
+        Round3->setObjectName(QString::fromUtf8("Round3"));
+
+        verticalLayout_16->addWidget(Round3);
+
+        label_29 = new QLabel(tab_2);
+        label_29->setObjectName(QString::fromUtf8("label_29"));
+
+        verticalLayout_16->addWidget(label_29);
+
+        Round7 = new QTextEdit(tab_2);
+        Round7->setObjectName(QString::fromUtf8("Round7"));
+
+        verticalLayout_16->addWidget(Round7);
+
+
+        horizontalLayout_6->addLayout(verticalLayout_16);
+
+        verticalLayout_17 = new QVBoxLayout();
+        verticalLayout_17->setObjectName(QString::fromUtf8("verticalLayout_17"));
+        label_30 = new QLabel(tab_2);
+        label_30->setObjectName(QString::fromUtf8("label_30"));
+
+        verticalLayout_17->addWidget(label_30);
+
+        Round4 = new QTextEdit(tab_2);
+        Round4->setObjectName(QString::fromUtf8("Round4"));
+
+        verticalLayout_17->addWidget(Round4);
+
+        label_31 = new QLabel(tab_2);
+        label_31->setObjectName(QString::fromUtf8("label_31"));
+
+        verticalLayout_17->addWidget(label_31);
+
+        Round8 = new QTextEdit(tab_2);
+        Round8->setObjectName(QString::fromUtf8("Round8"));
+
+        verticalLayout_17->addWidget(Round8);
+
+
+        horizontalLayout_6->addLayout(verticalLayout_17);
+
+        tabWidget->addTab(tab_2, QString());
         tab_4 = new QWidget();
         tab_4->setObjectName(QString::fromUtf8("tab_4"));
         verticalLayout_8 = new QVBoxLayout(tab_4);
@@ -349,7 +625,7 @@ public:
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 1263, 34));
+        menubar->setGeometry(QRect(0, 0, 2481, 34));
         MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));
@@ -357,7 +633,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(1);
+        tabWidget->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -380,6 +656,24 @@ public:
         label_12->setText(QCoreApplication::translate("MainWindow", "\320\241 \320\277\320\276\320\274\320\276\321\211\321\214\321\216 \320\272\320\273\321\216\321\207\320\260 \320\277\320\276 \320\275\320\276\320\274\320\265\321\200\321\203 \321\201\321\202\321\203\320\264\320\265\320\275\321\202\320\260", nullptr));
         label_14->setText(QCoreApplication::translate("MainWindow", "\320\241 \320\277\320\276\320\274\320\276\321\211\321\214\321\216 LFSR", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(lab2), QCoreApplication::translate("MainWindow", "Histogram lab2", nullptr));
+        label_16->setText(QCoreApplication::translate("MainWindow", "1", nullptr));
+        label_18->setText(QCoreApplication::translate("MainWindow", "5", nullptr));
+        label_20->setText(QCoreApplication::translate("MainWindow", "2", nullptr));
+        label_21->setText(QCoreApplication::translate("MainWindow", "6", nullptr));
+        label_17->setText(QCoreApplication::translate("MainWindow", "3", nullptr));
+        label_19->setText(QCoreApplication::translate("MainWindow", "7", nullptr));
+        label_22->setText(QCoreApplication::translate("MainWindow", "4", nullptr));
+        label_23->setText(QCoreApplication::translate("MainWindow", "8", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(tab), QCoreApplication::translate("MainWindow", "Histogram Lab3", nullptr));
+        label_24->setText(QCoreApplication::translate("MainWindow", "Round 1", nullptr));
+        label_25->setText(QCoreApplication::translate("MainWindow", "Round 5", nullptr));
+        label_26->setText(QCoreApplication::translate("MainWindow", "Round 2", nullptr));
+        label_27->setText(QCoreApplication::translate("MainWindow", "Round 6", nullptr));
+        label_28->setText(QCoreApplication::translate("MainWindow", "Round 3", nullptr));
+        label_29->setText(QCoreApplication::translate("MainWindow", "Round 7", nullptr));
+        label_30->setText(QCoreApplication::translate("MainWindow", "Round 4", nullptr));
+        label_31->setText(QCoreApplication::translate("MainWindow", "Round 8", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(tab_2), QCoreApplication::translate("MainWindow", "Out Lab3", nullptr));
         label_5->setText(QCoreApplication::translate("MainWindow", "OFB", nullptr));
         label_3->setText(QCoreApplication::translate("MainWindow", "CPC", nullptr));
         label_2->setText(QCoreApplication::translate("MainWindow", "ECB", nullptr));
