@@ -31,6 +31,8 @@ public:
 
   void sumArray(int *arr1, int *arr2, int *result);
 
+  void sumArray(QVector<int> &arr1, QVector<int> &arr2, QVector<int> &result);
+
   void sum(QVector<int> &out_bit, int *buf_array, int *K);
 
   void ECB(QVector<int> &bit_array, QVector<int> &ECB_out_bit, int *K0,

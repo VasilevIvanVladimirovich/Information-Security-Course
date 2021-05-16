@@ -57,7 +57,6 @@ public:
     QFormLayout *formLayout_4;
     QLabel *label_15;
     QLineEdit *key;
-    QTextEdit *debugedit;
     QLabel *label_10;
     QCustomPlot *textPlot;
     QPushButton *pushButton;
@@ -262,11 +261,6 @@ public:
 
 
         verticalLayout_7->addLayout(horizontalLayout_4);
-
-        debugedit = new QTextEdit(Text);
-        debugedit->setObjectName(QString::fromUtf8("debugedit"));
-
-        verticalLayout_7->addWidget(debugedit);
 
         label_10 = new QLabel(Text);
         label_10->setObjectName(QString::fromUtf8("label_10"));
@@ -650,7 +644,7 @@ public:
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 2481, 34));
+        menubar->setGeometry(QRect(0, 0, 2481, 33));
         MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));

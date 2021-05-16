@@ -151,9 +151,6 @@
          </layout>
         </item>
         <item>
-         <widget class="QTextEdit" name="debugedit"/>
-        </item>
-        <item>
          <widget class="QLabel" name="label_10">
           <property name="text">
            <string>Histogram text</string>
@@ -677,7 +674,7 @@
      <x>0</x>
      <y>0</y>
      <width>2481</width>
-     <height>34</height>
+     <height>33</height>
     </rect>
    </property>
   </widget>

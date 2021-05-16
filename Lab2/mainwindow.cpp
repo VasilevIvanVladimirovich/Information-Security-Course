@@ -159,6 +159,16 @@ void MainWindow::sumArray(int *arr1, int *arr2, int *result) {
   }
 }
 
+void MainWindow::sumArray(QVector<int> &arr1, QVector<int> &arr2,
+                          QVector<int> &result) {
+  for (int i = 0; i < arr1.length(); i++) {
+    if ((arr1[i] == 1 && arr2[i] == 1) || (arr1[i] == 0 && arr2[i] == 0))
+        result.push_back(0);
+    if ((arr1[i] == 1 && arr2[i] == 0) || (arr1[i] == 0 && arr2[i] == 1))
+        result.push_back(1);
+  }
+}
+
 void MainWindow::OFB(QVector<int> &bit_array, QVector<int> &OFB_out_bit,
                      int *C0, int *P0) {
   int buf_sum[5];
@@ -281,37 +291,37 @@ bool MainWindow::checkWordInArray2(int idexText, QString key,
 
 bool MainWindow::checkWordInArray2(int idexText, QString *key,
                                    QString *arrayText) {
-    for (int i = 0; i < 32; i++) {
-        if (key[idexText] == arrayText[i] || key[idexText] == " ")
-            return false;
-    }
-    return true;
+  for (int i = 0; i < 32; i++) {
+    if (key[idexText] == arrayText[i] || key[idexText] == " ")
+      return false;
+  }
+  return true;
 }
 
 void MainWindow::createNewAlphPogvorka(QString key, QString *alph,
                                        QString *alphDefault) {
-  QString newAlph[32] = {};
-
-  for (int idexText = 0, indexArrey = 0; indexArrey < key.length();
-       idexText++) {
+  QString newAlph[32] = {0};
+  int indexArreyAlph = 0;
+  for (int idexText = 0; idexText < key.length(); idexText++) {
     if (checkWordInArray2(idexText, key, newAlph)) {
-      newAlph[indexArrey] = key[idexText];
-      indexArrey++;
+      newAlph[indexArreyAlph] = key[idexText];
+      indexArreyAlph++;
     }
   }
-/*
-  for (int indexNewAlph = 0; indexNewAlph < 32; indexNewAlph++) {
-    if (newAlph[indexNewAlph] == "") {
-      for (int indexDefAlph = 0; indexDefAlph < 32; indexDefAlph++) {
-        if (checkWordInArray2(indexDefAlph, alphDefault, newAlph)) {
-          newAlph[indexNewAlph] = alphDefault[indexDefAlph];
-        }
+
+  for (; indexArreyAlph < 32; indexArreyAlph++) {
+    for (int indexDefAlph = 0; indexDefAlph < 32;
+         indexDefAlph++) { //по массиву дефолтного алфавита
+      if (checkWordInArray2(indexDefAlph, alphDefault, newAlph)) {
+        newAlph[indexArreyAlph] = alphDefault[indexDefAlph];
+        break;
       }
     }
   }
-*/
-  for (int i = 0; i < 32; i++)
+
+  for (int i = 0; i < 32; i++) {
     alph[i] = newAlph[i];
+  }
 }
 
 QString MainWindow::translateText(QString text, QString *alph,
@@ -481,16 +491,9 @@ void MainWindow::lab2(QString key, QString text) {
   ui->plot2->replot();
 
   ///////////////////////////////////////////// 3
-/*
   QString newText3;
   createNewAlphPogvorka(key, alphPogovorka, alphDefault);
-  for (int i = 0; i < 32; i++) {
-    debug += "i: " + QString::number(i) + "  " + alphPogovorka[i] + "\n";
-  }
   newText3 = translateText(text, alphPogovorka, alphDefault);
-  debug += "\n";
-
-  ui->debugedit->setText(debug);
   QVector<int> bit_array_tree;
   QVector<int> decimal_array_tree;
   Word(newText3, bit_array_tree);
@@ -526,9 +529,10 @@ void MainWindow::lab2(QString key, QString text) {
   bars3->setData(x3, y3, true);
   bars3->setWidth(h);
   ui->plot3->replot();
-  /*
-  ///////////////////////////////////////////// 4
 
+  ///////////////////////////////////////////// 4
+  QVector<int> bin_array_text;
+  Word(text, bin_array_text);
   int X4 = 1;
   int X3 = 1;
   int X2 = 0;
@@ -540,21 +544,24 @@ void MainWindow::lab2(QString key, QString text) {
       {0, 0, 1, 0, 0},      {0, 0, 0, 1, 0},
   };
   QVector<int> arrayLFSR;
-  GenerateLFSR(arrayLFSR, A_matr, N);
+  QVector<int> binare_arrayLFSR;
+  QVector<int> binare_array_sum;
+  QVector<int> decimal_array_four;
+  GenerateLFSR(arrayLFSR, A_matr, text.length());
+  sumArray(bin_array_text, binare_arrayLFSR, binare_array_sum);
+  convertBinareDecimal(binare_array_sum, decimal_array_four);
 
   hh = 0;
-  a = MinValue(arrayLFSR, N);
-  b = MaxValue(arrayLFSR, N);
+  a = MinValue(decimal_array_four, N);
+  b = MaxValue(decimal_array_four, N);
   h = 1;
 
   QVector<double> x4(m), y4(m);
   for (int i = 0; i < m; i++) {
     ni = 0;
     for (int j = 0; j < N; j++) {
-      if (arrayLFSR[j] >= double(a) + hh and arrayLFSR[j] < double(a) + hh + h)
-        ni++;
-      else
-        continue;
+      if (decimal_array_four[j] >= double(a) + hh and decimal_array_four[j] < double(a) + hh +
+  h) ni++; else continue;
     }
     x4[i] = double(a) + hh + (h / 2);
     y4[i] = ni;
@@ -571,7 +578,7 @@ void MainWindow::lab2(QString key, QString text) {
   bars4->setData(x4, y4, true);
   bars4->setWidth(h);
   ui->plot4->replot();
-  */
+
 }
 
 void MainWindow::bin8bit(int n,
@@ -1064,8 +1071,6 @@ void MainWindow::lab3(QString text, QString key) {
 }
 
 void MainWindow::on_pushButton_clicked() {
-  ui->debugedit->setText(" ");
-
   ui->OFB->clearPlottables(); //очистка гистограмм
   ui->CPC->clearPlottables();
   ui->CFB->clearPlottables();
@@ -1224,11 +1229,14 @@ void MainWindow::on_pushButton_clicked() {
   ui->textPlot->replot();
 
   if (ui->checkBox->isChecked()) {
+
     ////////////////////////////////////////////////////////////График ECB
     QVector<int> ECB_out_bit;
     QVector<int> ECB_out;
     ECB(bit_array, ECB_out_bit, K0, K1);
     convertBinareDecimal(ECB_out_bit, ECB_out);
+    N = ECB_out.length();
+    hh = 0;
     a = MinValue(ECB_out, N);
     b = MaxValue(ECB_out, N);
     h = 1;
