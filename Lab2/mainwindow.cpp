@@ -499,7 +499,7 @@ void MainWindow::WordEightBit(QString str, QVector<int> &bit_array,bool iskey) /
     QString big[32] = {"А", "Б", "В", "Г", "Д", "Е", "Ж", "З", "И", "Й", "К", "Л", "М", "Н", "О", "П", "Р", "С", "Т",
                        "У", "Ф", "Х", "Ц", "Ч", "Ш", "Щ", "Ъ", "Ы", "Ь", "Э", "Ю", "Я"};
 if(!iskey){
-    if(str.length()/2!=0)
+    if(str.length()%2!=0)
     {
         for(int i = 0;i<8;i++) bit_array.push_back(0);
     }
@@ -532,17 +532,15 @@ void MainWindow::sumArray2(int *arr1, int *arr2, int *result) {
 void MainWindow::sdvig(int *result)
 {
     int buffer[8];
-
-    for(int i = 0;i<8;i++)
+    for(int i = 0;i<4;i++)
     {
-        if(i==3) //00010010
-        {
-            buffer[7]=result[i];
-            continue;
-        }
-
+        buffer[i]=result[i];
+    }
+    for(int i = 4;i<8;i++)
+    {
         buffer[i-1]=result[i];
     }
+    buffer[7]=result[3];
     for(int i = 0;i<8;i++)
     {
         result[i]=buffer[i];
@@ -550,8 +548,9 @@ void MainWindow::sdvig(int *result)
 
 }
 
-void MainWindow::round(QVector<int> &bit_array_text,int NumRound, QVector<int> &bit_array_key)
+void MainWindow::round(QVector<int> &bit_array_text,int NumRound, QVector<int> &bit_array_key, QString str)
 {
+    bool propuskRight=true;
     int left[8];
     int right[8];
     int key[8];
@@ -559,17 +558,18 @@ void MainWindow::round(QVector<int> &bit_array_text,int NumRound, QVector<int> &
     QVector<int> buffer;
     NumRound--;
 
+    if(str.length()%2!=0) propuskRight=false;
+
+
     for(int rezakEpta=0; rezakEpta<8;rezakEpta++)
     {
         key[rezakEpta] = bit_array_key[rezakEpta+NumRound*8];
     }
 
-
     for(int rezak = 0; rezak<bit_array_text.length();rezak+=16)
     {
         for(int i=0;i<8;i++) left[i]=bit_array_text[i+rezak];
         for(int i=0;i<8;i++) right[i]=bit_array_text[i+rezak+8];
-
         sumArray2(right,key,result);
         sdvig(result);
 
@@ -584,13 +584,31 @@ void MainWindow::round(QVector<int> &bit_array_text,int NumRound, QVector<int> &
         {
             for(int i=0;i<8;i++) left[i]=result[i];
          }
+
         for(int i = 0;i<8;i++) buffer.push_back(left[i]);
+        if(propuskRight){
         for(int i = 0;i<8;i++) buffer.push_back(right[i]);
+        propuskRight=true;
+        }else propuskRight=true;
 
     }
        bit_array_text.clear();
        bit_array_text=buffer;
 }
+
+void MainWindow::convertBinare8Decimal(QVector<int> &in_bit, QVector<int> &out_decimal) {
+    out_decimal.clear();
+    int sum;
+    for (int i = 0; i < in_bit.length(); i += 5) {
+        sum = 0;
+        for (int j = 4, k = 0; j >= 0; j--, k++) {
+            if (in_bit[i + k] == 1) {sum += pow(2, j);}
+        }
+        out_decimal.push_back(sum);
+    }
+}
+
+
 
 void MainWindow::rubka(QVector<int> &bit_array,QVector<int> &decimal_array)
 {
@@ -601,8 +619,7 @@ void MainWindow::rubka(QVector<int> &bit_array,QVector<int> &decimal_array)
         {
             buffer.push_back(bit_array[i+j]);
         }
-        convertBinareDecimal(buffer, decimal_array);
-        buffer.clear();
+        convertBinare8Decimal(buffer, decimal_array);
     }
 }
 
@@ -617,7 +634,6 @@ QString MainWindow::convertDecimalWords(QVector<int> DecimalArr)
         stringOut+=alph[DecimalArr[i]];
     }
     return stringOut;
-
 }
 
 void MainWindow::lab3(QString text,QString key)
@@ -653,55 +669,50 @@ void MainWindow::lab3(QString text,QString key)
 
     WordEightBit(key,bit_array_keys,true);
 
-
     bit_one=bit_array_text;
-    round(bit_one,1,bit_array_keys);
+    round(bit_one,1,bit_array_keys,text);
     rubka(bit_one,decimal_one);
-
-    for(int i =0;i<decimal_one.length();i++) debug+=QString::number(decimal_one[i])+" ";
-
-    ui->debugedit->setText(debug);
 
     ui->Round1->setText(convertDecimalWords(decimal_one));
 
     bit_two=bit_one;
-    round(bit_two,2,bit_array_keys);
+    round(bit_two,2,bit_array_keys,text);
     rubka(bit_two,decimal_two);
 
     ui->Round2->setText(convertDecimalWords(decimal_two));
 
     bit_tree=bit_two;
-    round(bit_tree,3,bit_array_keys);
+    round(bit_tree,3,bit_array_keys,text);
     rubka(bit_tree,decimal_tree);
 
     ui->Round3->setText(convertDecimalWords(decimal_tree));
 
     bit_four=bit_tree;
-    round(bit_four,4,bit_array_keys);
+    round(bit_four,4,bit_array_keys,text);
     rubka(bit_four,decimal_four);
 
     ui->Round4->setText(convertDecimalWords(decimal_four));
 
     bit_five=bit_four;
-    round(bit_five,5,bit_array_keys);
+    round(bit_five,5,bit_array_keys,text);
     rubka(bit_five,decimal_five);
 
     ui->Round5->setText(convertDecimalWords(decimal_five));
 
     bit_six=bit_five;
-    round(bit_six,6,bit_array_keys);
+    round(bit_six,6,bit_array_keys,text);
     rubka(bit_six,decimal_six);
 
     ui->Round6->setText(convertDecimalWords(decimal_six));
 
     bit_seven=bit_six;
-    round(bit_seven,7,bit_array_keys);
+    round(bit_seven,7,bit_array_keys,text);
     rubka(bit_seven,decimal_seven);
 
     ui->Round7->setText(convertDecimalWords(decimal_seven));
 
     bit_eight=bit_seven;
-    round(bit_eight,8,bit_array_keys);
+    round(bit_eight,8,bit_array_keys,text);
     rubka(bit_eight,decimal_eight);
 
     ui->Round8->setText(convertDecimalWords(decimal_eight));
@@ -985,9 +996,9 @@ void MainWindow::on_pushButton_clicked() {
         ui->key->setText("Железный шпиц дома лежит");
         key="Железный шпиц дома лежит";
     }
+if(ui->checkBox_3->isChecked()) lab2(key,text);
+if(ui->checkBox_2->isChecked()) lab3(text,key);
 
-    //lab2(key,text);
-    lab3(text,key);
 
     int K0[5];
     int K1[5];
@@ -1041,18 +1052,47 @@ void MainWindow::on_pushButton_clicked() {
     Word(text, bit_array);
     convertBinareDecimal(bit_array, text_decimal);
     QString out = "";
+    int N = text_decimal.length();
+    double h, hh = 0;
+    double ni;
+    int m = 32;
+    double a, b;
 
+    //////////////////////////////////////////////////////////// График Текста
+        N = text_decimal.length();
+        hh = 0;
+        a = MinValue(text_decimal, N);
+        b = MaxValue(text_decimal, N);
+        h = 1;
+        QVector<double> x0(m), y0(m);
+        for (int i = 0; i < m; i++) {
+            ni = 0;
+            for (int j = 0; j < N; j++) {
+                if (text_decimal[j] >= double(a) + hh and text_decimal[j] < double(a) + hh + h) ni++;
+                else continue;
+            }
+            x0[i] = double(a) + hh + (h / 2);
+            y0[i] = ni;
+            hh += h;
+        }
+        double first_maxY = 1;
+        for (int i = 0; i < m; i++) {
+            if (y0[i] > first_maxY) first_maxY = y0[i];
+        }
+        ui->textPlot->xAxis->setRange(0, 32);
+        ui->textPlot->yAxis->setRange(0, first_maxY);
+        QCPBars *bars0 = new QCPBars(ui->textPlot->xAxis, ui->textPlot->yAxis);
+        bars0->setData(x0, y0, true);
+        bars0->setWidth(h);
+        ui->textPlot->replot();
 
+        if(ui->checkBox->isChecked())
+        {
 ////////////////////////////////////////////////////////////График ECB
     QVector<int> ECB_out_bit;
     QVector<int> ECB_out;
     ECB(bit_array, ECB_out_bit, K0, K1);
     convertBinareDecimal(ECB_out_bit, ECB_out);
-    int N = ECB_out.length();
-    double h, hh = 0;
-    double ni;
-    int m = 32;
-    double a, b;
     a = MinValue(ECB_out, N);
     b = MaxValue(ECB_out, N);
     h = 1;
@@ -1068,10 +1108,6 @@ void MainWindow::on_pushButton_clicked() {
         x1[i] = double(a) + hh + (h / 2);
         y1[i] = ni;
         hh += h;
-    }
-    double first_maxY = 1;
-    for (int i = 0; i < m; i++) {
-        if (y1[i] > first_maxY) first_maxY = y1[i];
     }
     ui->ECB->xAxis->setRange(0, 32);
     ui->ECB->yAxis->setRange(0, first_maxY);
@@ -1163,27 +1199,6 @@ void MainWindow::on_pushButton_clicked() {
     bars4->setData(x4, y4, true);
     bars4->setWidth(h);
     ui->CFB->replot();
-//////////////////////////////////////////////////////////// График Текста
-    N = text_decimal.length();
-    hh = 0;
-    a = MinValue(text_decimal, N);
-    b = MaxValue(text_decimal, N);
-    h = 1;
-    QVector<double> x0(m), y0(m);
-    for (int i = 0; i < m; i++) {
-        ni = 0;
-        for (int j = 0; j < N; j++) {
-            if (text_decimal[j] >= double(a) + hh and text_decimal[j] < double(a) + hh + h) ni++;
-            else continue;
-        }
-        x0[i] = double(a) + hh + (h / 2);
-        y0[i] = ni;
-        hh += h;
-    }
-    ui->textPlot->xAxis->setRange(0, 32);
-    ui->textPlot->yAxis->setRange(0, first_maxY);
-    QCPBars *bars0 = new QCPBars(ui->textPlot->xAxis, ui->textPlot->yAxis);
-    bars0->setData(x0, y0, true);
-    bars0->setWidth(h);
-    ui->textPlot->replot();
+
+}
 }

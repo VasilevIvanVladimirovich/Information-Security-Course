@@ -50,6 +50,8 @@ public:
 
     QString convertDecimalWords(QVector<int> DecimalArr);
 
+    void convertBinare8Decimal(QVector<int> &out_bit, QVector<int> &ECB_out);
+
     void createNewAlphConstant(QString *alph);
 
     void convertBinareDecimal(QVector<int> &out_bit, QVector<int> &ECB_out);
@@ -60,7 +62,7 @@ public:
 
     void lab3(QString text, QString key);
 
-    void round(QVector<int> &bit_array_text,int NumRound, QVector<int> &bit_array_key);
+    void round(QVector<int> &bit_array_text,int NumRound, QVector<int> &bit_array_key,QString str);
 
     void WordEightBit(QString str, QVector<int> &bit_array,bool iskey);
 

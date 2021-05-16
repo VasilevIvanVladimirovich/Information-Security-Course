@@ -11,6 +11,7 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QCheckBox>
 #include <QtWidgets/QFormLayout>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
@@ -37,6 +38,10 @@ public:
     QVBoxLayout *verticalLayout_7;
     QLabel *label;
     QTextEdit *textEdit;
+    QHBoxLayout *horizontalLayout_7;
+    QCheckBox *checkBox_3;
+    QCheckBox *checkBox_2;
+    QCheckBox *checkBox;
     QHBoxLayout *horizontalLayout;
     QFormLayout *formLayout_2;
     QLabel *label_8;
@@ -162,6 +167,26 @@ public:
         textEdit->setObjectName(QString::fromUtf8("textEdit"));
 
         verticalLayout_7->addWidget(textEdit);
+
+        horizontalLayout_7 = new QHBoxLayout();
+        horizontalLayout_7->setObjectName(QString::fromUtf8("horizontalLayout_7"));
+        checkBox_3 = new QCheckBox(Text);
+        checkBox_3->setObjectName(QString::fromUtf8("checkBox_3"));
+
+        horizontalLayout_7->addWidget(checkBox_3);
+
+        checkBox_2 = new QCheckBox(Text);
+        checkBox_2->setObjectName(QString::fromUtf8("checkBox_2"));
+
+        horizontalLayout_7->addWidget(checkBox_2);
+
+        checkBox = new QCheckBox(Text);
+        checkBox->setObjectName(QString::fromUtf8("checkBox"));
+
+        horizontalLayout_7->addWidget(checkBox);
+
+
+        verticalLayout_7->addLayout(horizontalLayout_7);
 
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
@@ -643,6 +668,9 @@ public:
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
         label->setText(QCoreApplication::translate("MainWindow", "\320\222\320\262\320\265\320\264\320\270\321\202\320\265 \321\202\320\265\320\272\321\201\321\202:", nullptr));
+        checkBox_3->setText(QCoreApplication::translate("MainWindow", "Lab2", nullptr));
+        checkBox_2->setText(QCoreApplication::translate("MainWindow", "Lab3", nullptr));
+        checkBox->setText(QCoreApplication::translate("MainWindow", "DES", nullptr));
         label_8->setText(QCoreApplication::translate("MainWindow", "K1:", nullptr));
         label_9->setText(QCoreApplication::translate("MainWindow", "K0:", nullptr));
         label_6->setText(QCoreApplication::translate("MainWindow", "P0:", nullptr));
