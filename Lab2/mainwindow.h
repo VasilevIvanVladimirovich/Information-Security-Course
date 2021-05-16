@@ -1,85 +1,95 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <QMainWindow>
 #include "qcustomplot.h"
+#include <QMainWindow>
 QT_BEGIN_NAMESPACE
-namespace Ui { class MainWindow; }
+namespace Ui {
+class MainWindow;
+}
 QT_END_NAMESPACE
 
-class MainWindow : public QMainWindow
-{
-    Q_OBJECT
+class MainWindow : public QMainWindow {
+  Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr);
+  MainWindow(QWidget *parent = nullptr);
 
-    void Word(QString str, QVector<int> &bit_arr);
+  void Word(QString str, QVector<int> &bit_arr);
 
-    void bin(int n,QVector<int> &bit_arr);
+  void bin(int n, QVector<int> &bit_arr);
 
-    void bin8bit(int n, QVector<int> &bit_array);
+  void bin8bit(int n, QVector<int> &bit_array);
 
-    void invertLastBit(QVector<int> &out_bit);
+  void invertLastBit(QVector<int> &out_bit);
 
-    void invertBit(QVector<int> &out_bit,int i);
+  void invertBit(QVector<int> &out_bit, int i);
 
-    double MinValue(QVector<int> &gen,int n);
+  double MinValue(QVector<int> &gen, int n);
 
-    double MaxValue(QVector<int> &gen,int n);
+  double MaxValue(QVector<int> &gen, int n);
 
-    void sumArray(int* arr1,int *arr2,int *result);
+  void sumArray(int *arr1, int *arr2, int *result);
 
-    void sum(QVector<int> &out_bit,int *buf_array,int *K);
+  void sum(QVector<int> &out_bit, int *buf_array, int *K);
 
-    void ECB(QVector<int> &bit_array,QVector<int> &ECB_out_bit,int *K0,int *K1);
+  void ECB(QVector<int> &bit_array, QVector<int> &ECB_out_bit, int *K0,
+           int *K1);
 
-    void CPC(QVector<int> &bit_array,QVector<int> &CPC_out_bit,int *C0);
+  void CPC(QVector<int> &bit_array, QVector<int> &CPC_out_bit, int *C0);
 
-    void OFB(QVector<int> &bit_array,QVector<int> &OFB_out_bit,int *C0,int *P0);
+  void OFB(QVector<int> &bit_array, QVector<int> &OFB_out_bit, int *C0,
+           int *P0);
 
-    void CFB(QVector<int> &bit_array,QVector<int> &OFB_out_bit,int *C0);
+  void CFB(QVector<int> &bit_array, QVector<int> &OFB_out_bit, int *C0);
 
-    void createNewAlph(QString text,QString *alph);
+  void createNewAlph(QString text, QString *alph);
 
-    bool checkWordInArray(int idexText,  QString key, QString *arrayText);
+  bool checkWordInArray(int idexText, QString key, QString *arrayText);
 
-    bool checkWordInAlph(int indexAlph, QString *alph, QString *arrayText);
+  bool checkWordInAlph(int indexAlph, QString *alph, QString *arrayText);
 
-    QString translateText(QString key,QString *alph);
+  QString translateText(QString key, QString *alph, QString *alphDefault);
 
-    QString convertDecimalWords(QVector<int> DecimalArr);
+  void createNewAlphPogvorka(QString key, QString *alph, QString *alphDefault);
 
-    void convertBinare8Decimal(QVector<int> &out_bit, QVector<int> &ECB_out);
+  QString convertDecimalWords(QVector<int> DecimalArr);
 
-    void createNewAlphConstant(QString *alph);
+  bool checkWordInArray2(int idexText, QString key, QString *arrayText);
 
-    void convertBinareDecimal(QVector<int> &out_bit, QVector<int> &ECB_out);
+  bool checkWordInArray2(int idexText, QString *key, QString *arrayText);
 
-    void GenerateLFSR(QVector<int> &arrayLFSR,int (&A_matr)[5][5],int N);
+  void convertBinare8Decimal(QVector<int> &out_bit, QVector<int> &ECB_out);
 
-    void MatrixMultiplication(int (&A_matr)[5][5],int *x0,int *x_func);
+  void createNewAlphConstant(QString *alph);
 
-    void lab3(QString text, QString key);
+  void convertBinareDecimal(QVector<int> &out_bit, QVector<int> &ECB_out);
 
-    void round(QVector<int> &bit_array_text,int NumRound, QVector<int> &bit_array_key,QString str);
+  void GenerateLFSR(QVector<int> &arrayLFSR, int (&A_matr)[5][5], int N);
 
-    void WordEightBit(QString str, QVector<int> &bit_array,bool iskey);
+  void MatrixMultiplication(int (&A_matr)[5][5], int *x0, int *x_func);
 
-    void sumArray2(int *arr1, int *arr2, int *result);
+  void lab3(QString text, QString key);
 
-    void rubka(QVector<int> &bit_array,QVector<int> &decimal_array);
+  void round(QVector<int> &bit_array_text, int NumRound,
+             QVector<int> &bit_array_key, QString str);
 
-    void sdvig(int *result);
+  void WordEightBit(QString str, QVector<int> &bit_array, bool iskey);
 
-    void lab2(QString key,QString text);
+  void sumArray2(int *arr1, int *arr2, int *result);
 
-    ~MainWindow();
+  void rubka(QVector<int> &bit_array, QVector<int> &decimal_array);
+
+  void sdvig(int *result);
+
+  void lab2(QString key, QString text);
+
+  ~MainWindow();
 
 private slots:
-    void on_pushButton_clicked();
+  void on_pushButton_clicked();
 
 private:
-    Ui::MainWindow *ui;
+  Ui::MainWindow *ui;
 };
 #endif // MAINWINDOW_H
