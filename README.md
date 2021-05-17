@@ -13,6 +13,11 @@ Lab2: Парное шифрование, c помощью ключа конст�
 
 lab3: Реализовать  работу сети  Файстеля
 
+![image](https://user-images.githubusercontent.com/65816571/118481073-c3afa400-b71b-11eb-97df-bac4938a2191.png)
+
+![image](https://user-images.githubusercontent.com/65816571/118481091-c7dbc180-b71b-11eb-86ca-13113d88108a.png)
+
+![image](https://user-images.githubusercontent.com/65816571/118481109-cc07df00-b71b-11eb-8c88-36c5d73d4bde.png)
 
 
 Lab4: Шифрование текста (ECB,CBC,OFB,CFB)
