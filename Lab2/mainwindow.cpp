@@ -163,9 +163,9 @@ void MainWindow::sumArray(QVector<int> &arr1, QVector<int> &arr2,
                           QVector<int> &result) {
   for (int i = 0; i < arr1.length(); i++) {
     if ((arr1[i] == 1 && arr2[i] == 1) || (arr1[i] == 0 && arr2[i] == 0))
-        result.push_back(0);
+      result.push_back(0);
     if ((arr1[i] == 1 && arr2[i] == 0) || (arr1[i] == 0 && arr2[i] == 1))
-        result.push_back(1);
+      result.push_back(1);
   }
 }
 
@@ -419,6 +419,7 @@ void MainWindow::lab2(QString key, QString text) {
   Word(newText1, bit_array_one);
   convertBinareDecimal(bit_array_one, decimal_array_one);
 
+  N = decimal_array_one.length();
   hh = 0;
   a = MinValue(decimal_array_one, N);
   b = MaxValue(decimal_array_one, N);
@@ -459,6 +460,7 @@ void MainWindow::lab2(QString key, QString text) {
   Word(newText2, bit_array_two);
   convertBinareDecimal(bit_array_two, decimal_array_two);
 
+  N = decimal_array_two.length();
   hh = 0;
   a = MinValue(decimal_array_two, N);
   b = MaxValue(decimal_array_two, N);
@@ -499,6 +501,7 @@ void MainWindow::lab2(QString key, QString text) {
   Word(newText3, bit_array_tree);
   convertBinareDecimal(bit_array_tree, decimal_array_tree);
 
+  N = decimal_array_tree.length();
   hh = 0;
   a = MinValue(decimal_array_tree, N);
   b = MaxValue(decimal_array_tree, N);
@@ -551,22 +554,26 @@ void MainWindow::lab2(QString key, QString text) {
   sumArray(bin_array_text, binare_arrayLFSR, binare_array_sum);
   convertBinareDecimal(binare_array_sum, decimal_array_four);
 
+  N = decimal_array_four.length();
   hh = 0;
-  a = MinValue(decimal_array_four, N);
-  b = MaxValue(decimal_array_four, N);
+  a = 0;
+  b = 32;
   h = 1;
-
   QVector<double> x4(m), y4(m);
   for (int i = 0; i < m; i++) {
     ni = 0;
     for (int j = 0; j < N; j++) {
-      if (decimal_array_four[j] >= double(a) + hh and decimal_array_four[j] < double(a) + hh +
-  h) ni++; else continue;
+      if (decimal_array_four[j] >= a + hh and
+          decimal_array_four[j] < a + hh + h)
+        ni++;
+      else
+        continue;
     }
     x4[i] = double(a) + hh + (h / 2);
     y4[i] = ni;
     hh += h;
   }
+
   first_maxY = 1;
   for (int i = 0; i < m; i++) {
     if (y4[i] > first_maxY)
@@ -578,7 +585,6 @@ void MainWindow::lab2(QString key, QString text) {
   bars4->setData(x4, y4, true);
   bars4->setWidth(h);
   ui->plot4->replot();
-
 }
 
 void MainWindow::bin8bit(int n,
@@ -825,6 +831,7 @@ void MainWindow::lab3(QString text, QString key) {
   double a, b;
   ////////////////////////////////////////////1
 
+  N = decimal_one.length();
   a = MinValue(decimal_one, N);
   b = MaxValue(decimal_one, N);
   h = 1;
@@ -857,6 +864,7 @@ void MainWindow::lab3(QString text, QString key) {
 
   ////////////////////////////////////////////1
 
+  N = decimal_two.length();
   a = MinValue(decimal_two, N);
   b = MaxValue(decimal_two, N);
   h = 1;
@@ -887,6 +895,7 @@ void MainWindow::lab3(QString text, QString key) {
   barstwo->setWidth(h);
   ui->two->replot();
   ////////////////////////////////////////////3
+  N = decimal_tree.length();
   a = MinValue(decimal_tree, N);
   b = MaxValue(decimal_tree, N);
   h = 1;
@@ -918,6 +927,7 @@ void MainWindow::lab3(QString text, QString key) {
   ui->tree->replot();
 
   ////////////////////////////////////////////4
+  N = decimal_four.length();
   a = MinValue(decimal_four, N);
   b = MaxValue(decimal_four, N);
   h = 1;
@@ -948,6 +958,7 @@ void MainWindow::lab3(QString text, QString key) {
   barsfour->setWidth(h);
   ui->four->replot();
   ////////////////////////////////////////////5
+  N = decimal_five.length();
   a = MinValue(decimal_five, N);
   b = MaxValue(decimal_five, N);
   h = 1;
@@ -978,6 +989,7 @@ void MainWindow::lab3(QString text, QString key) {
   barsfive->setWidth(h);
   ui->five->replot();
   ////////////////////////////////////////////6
+  N = decimal_six.length();
   a = MinValue(decimal_six, N);
   b = MaxValue(decimal_six, N);
   h = 1;
@@ -1009,6 +1021,7 @@ void MainWindow::lab3(QString text, QString key) {
   ui->six->replot();
 
   ////////////////////////////////////////////7
+  N = decimal_seven.length();
   a = MinValue(decimal_seven, N);
   b = MaxValue(decimal_seven, N);
   h = 1;
@@ -1039,6 +1052,7 @@ void MainWindow::lab3(QString text, QString key) {
   barsseven->setWidth(h);
   ui->seven->replot();
   ////////////////////////////////////////////8
+  N = decimal_eight.length();
   a = MinValue(decimal_eight, N);
   b = MaxValue(decimal_eight, N);
   h = 1;
