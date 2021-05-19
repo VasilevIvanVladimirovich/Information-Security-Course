@@ -4,8 +4,23 @@ Lab1: Генераторы (Линейно конгэруентный, BBS, LFSR
 
 ![image](https://user-images.githubusercontent.com/65816571/114615801-c6e3ea00-9cae-11eb-8e4f-3670afcfe1ba.png)
 
+Lab2: Парное шифрование, c помощью ключа константы, c помощью ключа поговорки, c помощью ключа псевдослучайной последовательности
 
-Lab2: Шифрование текста (ECB,CBC,OFB,CFB)
+![image](https://user-images.githubusercontent.com/65816571/118480906-8a773400-b71b-11eb-81a9-cf7780142598.png)
+
+![image](https://user-images.githubusercontent.com/65816571/118480917-8fd47e80-b71b-11eb-812e-8da93e5d06ba.png)
+
+
+lab3: Реализовать  работу сети  Файстеля
+
+![image](https://user-images.githubusercontent.com/65816571/118481073-c3afa400-b71b-11eb-97df-bac4938a2191.png)
+
+![image](https://user-images.githubusercontent.com/65816571/118481091-c7dbc180-b71b-11eb-86ca-13113d88108a.png)
+
+![image](https://user-images.githubusercontent.com/65816571/118481109-cc07df00-b71b-11eb-8c88-36c5d73d4bde.png)
+
+
+Lab4: Шифрование текста (ECB,CBC,OFB,CFB)
 
 ![image](https://user-images.githubusercontent.com/65816571/114614947-cd259680-9cad-11eb-8abf-1503560bf810.png)
 
