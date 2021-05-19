@@ -536,10 +536,10 @@ void MainWindow::lab2(QString key, QString text) {
   ///////////////////////////////////////////// 4
   QVector<int> bin_array_text;
   Word(text, bin_array_text);
-  int X4 = 1;
+  int X4 = 0;
   int X3 = 1;
   int X2 = 0;
-  int X1 = 1;
+  int X1 = 0;
   int X0 = 1;
 
   int A_matr[5][5] = {
@@ -550,6 +550,7 @@ void MainWindow::lab2(QString key, QString text) {
   QVector<int> binare_arrayLFSR;
   QVector<int> binare_array_sum;
   QVector<int> decimal_array_four;
+
   GenerateLFSR(arrayLFSR, A_matr, text.length());
   sumArray(bin_array_text, binare_arrayLFSR, binare_array_sum);
   convertBinareDecimal(binare_array_sum, decimal_array_four);

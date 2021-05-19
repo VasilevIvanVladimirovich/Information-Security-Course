@@ -159,7 +159,7 @@ void MainWindow::MatrixMultiplication(int (&A_matr)[5][5],int *x0,int *x_func)
     }
 }
 
-QString MainWindow::GenerateLFSR(int *arrayLFSR,int (&A_matr)[5][5],int N,QString str)
+QString MainWindow::GenerateLFSR(int *arrayLFSR,int (&A_matr)[5][5],int N,QString str) /////
 {
     int x0[5]={1,0,0,0,0};
     int x_func[5];
@@ -198,11 +198,12 @@ void MainWindow::on_pushButton_clicked()
    ui->textBrowser->setText(GenerateLCP(arrayLCP,A,B,M,N,strLCP));
    double h,hh=0;
    double ni;
-   int m = 1+3.22*log(N);
+   int m = 32;
    double a,b;
+
    a=MinValue(arrayLCP,N);
    b=MaxValue(arrayLCP,N);
-   h = double(b-a)/m;
+   h = 1;
 
    QVector<double> x1(m), y1(m);
    for (int i=0; i<m; i++)
@@ -236,10 +237,10 @@ void MainWindow::on_pushButton_clicked()
    int *arrayBBS = new int[N];
    ui->textBrowser_2->setText(GenerateBBS(arrayBBS,p,q,N,M));
    hh=0;
-   m = 1+3.22*log(N);
+   m = 32;
    a=MinValue(arrayBBS,N);
    b=MaxValue(arrayBBS,N);
-   h = double(b-a)/m;
+   h =1;
 
    QVector<double> x2(m), y2(m);
    for (int i=0; i<m; i++)
@@ -280,10 +281,10 @@ void MainWindow::on_pushButton_clicked()
    QString strLFSR;
    ui->textBrowser_3->setText(GenerateLFSR(arrayLFSR,A_matr,N,strLFSR));
    hh=0;
-   m = 1+3.22*log(N);
+   m = 32;
    a=MinValue(arrayLFSR,N);
    b=MaxValue(arrayLFSR,N);
-   h = double(b-a)/m;
+   h = 1;
 
    QVector<double> x3(m), y3(m);
    for (int i=0; i<m; i++)
